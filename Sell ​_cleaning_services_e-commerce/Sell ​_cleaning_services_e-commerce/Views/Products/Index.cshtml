@@ -1,0 +1,124 @@
+﻿@model X.PagedList.IPagedList<Sell__cleaning_services_e_commerce.Models.Product> // Thay YourModel bằng model thực tế của bạn
+@using X.PagedList.Mvc.Core
+@using X.PagedList
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/admin/_Layout.cshtml";
+}
+<style>
+    .table td, .table th {
+        white-space: nowrap; /* Ngăn chặn việc gãy dòng */
+        overflow: hidden; /* Ẩn phần nội dung vượt quá kích thước của ô */
+        text-overflow: ellipsis; /* Hiển thị dấu chấm ba khi nội dung bị cắt */
+    }
+</style>
+
+<div class="card-header py-3">
+    <h1 class="m-0 font-weight-bold text-primary">Danh sách sản phẩm</h1>
+</div>
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <a asp-action="Create"><h5 class="m-0 font-weight-bold text-primary"><i class="fas fa-plus" style="color: #FFD43B;"></i> Tạo mới</h5></a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable">
+                <thead class="table-light">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model[0].ProductName)</th>
+                        <th>@Html.DisplayNameFor(model => model[0].Description)</th>
+                        <th>@Html.DisplayNameFor(model => model[0].Price)</th>
+                        <th>Tồn kho</th>
+                        <th>@Html.DisplayNameFor(model => model[0].Brand)</th>
+                        <th>@Html.DisplayNameFor(model => model[0].Supplier)</th>
+                        <th>@Html.DisplayNameFor(model => model[0].Weight)</th>
+                        <th>@Html.DisplayNameFor(model => model[0].Dimensions)</th>
+                        <th>@Html.DisplayNameFor(model => model[0].Material)</th>
+                        <th>@Html.DisplayNameFor(model => model[0].Power)</th>
+                        <th>@Html.DisplayNameFor(model => model[0].PowerSource)</th>
+                        <th>@Html.DisplayNameFor(model => model[0].ManufactureDate)</th>
+                        <th>@Html.DisplayNameFor(model => model[0].Origin)</th>
+                        <th>@Html.DisplayNameFor(model => model[0].WarrantyPeriod)</th>
+                        <th>@Html.DisplayNameFor(model => model[0].CreatedDate)</th>
+                        <th>@Html.DisplayNameFor(model => model[0].LastUpdatedDate)</th>
+                        <th>@Html.DisplayNameFor(model => model[0].IsDiscontinued)</th>
+                        <th>@Html.DisplayNameFor(model => model[0].Category.CategoryName)</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="right" title="@Html.DisplayFor(modelItem => item.Description)">
+                                    Mô tả
+                                </button>
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                            <td>@Html.DisplayFor(modelItem => item.QuantityInStock)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Brand)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Supplier)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Weight)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Dimensions)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Material)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Power)</td>
+                            <td>@Html.DisplayFor(modelItem => item.PowerSource)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ManufactureDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Origin)</td>
+                            <td>@Html.DisplayFor(modelItem => item.WarrantyPeriod)</td>
+                            <td>@Html.DisplayFor(modelItem => item.CreatedDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.LastUpdatedDate)</td>
+                            <td>
+                                @if (item.IsDiscontinued)
+                                {
+
+                                    <span class="btn btn-primary">
+                                        Đang kinh doanh
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="btn btn-danger">
+                                        Ngừng kinh doanh
+                                    </span>
+                                }
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Category.CategoryName)</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ProductId"><i class="fas fa-edit" style="color: #005eff;"></i></a> |
+                                <a asp-action="Details" asp-route-id="@item.ProductId"><i class="fas fa-info" style="color: #005eff;"></i></a> |
+                                <a asp-action="Delete" asp-route-id="@item.ProductId"><i class="fas fa-trash-alt" style="color: #ff0000;"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+</div>
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <nav aria-label="Page navigation">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+           {
+               LiElementClasses = new string[] { "page-item" },
+               PageClasses = new string[] { "page-link" },
+               UlElementClasses = new string[] { "pagination" }
+           })
+            </nav>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("searchInput").classList.remove("d-none");
+    document.getElementById("product").classList.add("active");
+</script>
