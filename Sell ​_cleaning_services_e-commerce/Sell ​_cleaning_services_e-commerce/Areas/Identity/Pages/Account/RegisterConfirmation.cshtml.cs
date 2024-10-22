@@ -7,11 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
+//using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Sell__cleaning_services_e_commerce.Models;
+using Sell__cleaning_services_e_commerce.Areas.MailService;
+using static System.Net.Mime.MediaTypeNames;
+
 
 namespace Sell_​_cleaning_services_e_commerce.Areas.Identity.Pages.Account
 {
@@ -59,6 +62,7 @@ namespace Sell_​_cleaning_services_e_commerce.Areas.Identity.Pages.Account
                 return NotFound($"Unable to load user with email '{email}'.");
             }
 
+            var text = "Nhấn vào đường link để xác thực tài khoản: ";
             Email = email;
             // Once you add a real email sender, you should remove this code that lets you confirm the account
             DisplayConfirmAccountLink = true;
@@ -72,6 +76,7 @@ namespace Sell_​_cleaning_services_e_commerce.Areas.Identity.Pages.Account
                     pageHandler: null,
                     values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                     protocol: Request.Scheme);
+                await _sender.SendEmailAsync(email, "Xác thực tài khoản", text + EmailConfirmationUrl);
             }
 
             return Page();
