@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
+using Sell__cleaning_services_e_commerce.Areas.MailService;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,9 @@ builder.Services.AddDefaultIdentity<User>(
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews();
+
+//Mail Service
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 //xủa lí kích thước uploade
 builder.Services.Configure<IISServerOptions>(options =>
