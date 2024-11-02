@@ -70,14 +70,14 @@
 }
 
 .btn.border-secondary:hover {
-    background: var(--bs-secondary) !important;
+    background: #fc5a31 !important;
     color: var(--bs-white) !important;
 }
 
 /*** Topbar Start ***/
 .fixed-top {
     transition: 0.5s;
-    background: var(--bs-white);
+    background: #fc5a31;
     border: 0;
 }
 
@@ -106,7 +106,7 @@
 }
 
 .topbar .top-link a small:hover {
-    color: var(--bs-secondary) !important;
+    color: white !important;
     transition: 0.5s;
 }
 
@@ -124,14 +124,14 @@
 
 .navbar {
     height: 100px;
-    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    border-bottom: 1px solid #fc5a31;
 }
 
 .navbar .navbar-nav .nav-link:hover,
 .navbar .navbar-nav .nav-link.active,
 .fixed-top.bg-white .navbar .navbar-nav .nav-link:hover,
 .fixed-top.bg-white .navbar .navbar-nav .nav-link.active {
-    color: var(--bs-primary);
+    color: white;
 }
 
 .navbar .dropdown-toggle::after {
@@ -157,8 +157,8 @@
 }
 
 .dropdown .dropdown-menu a:hover {
-    background: var(--bs-secondary);
-    color: var(--bs-primary);
+    background-color: white;
+    color: #fc5a31;
 }
 
 .navbar .nav-item:hover .dropdown-menu {
@@ -247,18 +247,17 @@
     height: 120px;
 }
 
-.featurs .featurs-item .featurs-icon::after {
-    content: "";
-    width: 35px;
-    height: 35px;
-    background: var(--bs-secondary);
-    position: absolute;
-    bottom: -10px;
-    transform: translate(-50%);
-    transform: rotate(45deg);
-    background: var(--bs-secondary);
-    
-}
+    .featurs .featurs-item .featurs-icon::after {
+        content: "";
+        width: 35px;
+        height: 35px;
+        /*background: var(--bs-secondary);*/
+        position: absolute;
+        bottom: -10px;
+        transform: translate(-50%);
+        transform: rotate(45deg);
+        /*background: style="color:#fc5a31;*/
+    }
 /*** featurs End ***/
 
 
@@ -277,7 +276,7 @@
 
 /*** Fruits Start ***/
 .fruite .tab-class .nav-item a.active {
-    background: var(--bs-secondary) !important;
+    background: #fc5a31 !important;
 }
 
 .fruite .tab-class .nav-item a.active span {
