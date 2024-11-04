@@ -1,0 +1,154 @@
+﻿@model X.PagedList.IPagedList<Sell__cleaning_services_e_commerce.Models.ViewModel.ProductTemp>
+@using X.PagedList.Mvc.Core
+@using X.PagedList
+
+
+@{
+    ViewData["Title"] = "Trang gian hàng sản phẩm";
+    Layout = "~/Views/Shared/customer/_Layout.cshtml";
+}
+
+<!-- Fruits Shop Start -->
+<div class="container-fluid fruite py-5">
+    <div class="container py-5">
+        <div class="row g-4">
+            <div class="col-lg-12">
+                <div class="row g-4">
+                    <div class="col-xl-3">
+                        <form method="get" asp-action="Index" asp-controller="Shop" class="w-100 mx-auto d-flex">
+                            <div class="input-group w-100">
+                                <input type="search" class="form-control p-3" placeholder="Từ khóa" name="SearchString" aria-describedby="search-icon-1">
+                                <button id="search-icon-1" class="input-group-text p-3" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="col-6"></div>
+                    <div class="col-xl-3">
+                        <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
+                            <label for="sortOrder">Sắp xếp theo:</label>
+                            <div class="dropdown">
+                                <button class="border-0 form-select-sm bg-light me-3 dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @if (ViewBag.CurrentSort == "MoiNhat")
+                                    {
+                                        @:Mới nhất
+                                    }
+                                    else if (ViewBag.CurrentSort == "TangDan")
+                                    {
+                                        @:Tăng dần
+                                    }
+                                    else if (ViewBag.CurrentSort == "GiamDan")
+                                    {
+                                        @:Giảm dần
+                                    }
+                                    else
+                                    {
+                                        @:Sắp xếp theo
+                                    }
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" asp-controller="Shop" asp-action="Index" asp-route-sortOrder="MoiNhat" asp-route-categoriesId="@ViewBag.CategoryId">Mới nhất</a>
+                                    <a class="dropdown-item" asp-controller="Shop" asp-action="Index" asp-route-sortOrder="TangDan" asp-route-categoriesId="@ViewBag.CategoryId">Tăng dần</a>
+                                    <a class="dropdown-item" asp-controller="Shop" asp-action="Index" asp-route-sortOrder="GiamDan" asp-route-categoriesId="@ViewBag.CategoryId">Giảm dần</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-3">
+                        <div class="row g-4">
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <h4>Loại sản phẩm</h4>
+                                    <ul class="list-unstyled fruite-categorie">
+                                        @foreach (var item in ViewBag.Category)
+                                        {
+                                            if (item.CategoryId == ViewBag.CategoryId && ViewBag.CategoryId != null)
+                                            {
+                                                <li class="border border-info">
+                                                    <div class="d-flex justify-content-between fruite-name text-warning">
+                                                        <a asp-controller="Shop" asp-action="Index" asp-route-categoriesId="@item.CategoryId" asp-route-sortOrder="@ViewBag.CurrentSort">@item.CategoryName</a>
+                                                    </div>
+                                                </li>
+                                            }
+                                            else if (item.CategoryId != ViewBag.CategoryId)
+                                            {
+                                                <li>
+                                                    <div class="d-flex justify-content-between fruite-name text-warning">
+                                                        <a asp-controller="Shop" asp-action="Index" asp-route-categoriesId="@item.CategoryId" asp-route-sortOrder="@ViewBag.CurrentSort">@item.CategoryName</a>
+                                                    </div>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="row g-4 justify-content-center">
+                            @foreach (var product in Model)
+                            {
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="rounded position-relative fruite-item">
+                                        <a asp-controller="Shop" asp-action="ProductDetail" asp-route-id="@product.ProductId">
+                                            <div class="fruite-img produc" style="width: 100%; height: 230px; overflow: hidden; position: relative;">
+                                                <img src="@Url.Content(product.img)" alt="@product.ProductName" style="width: 100%; height: 100%; object-fit: cover;">
+                                            </div>
+                                        </a>
+                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom" data-product-id="@product.ProductId">
+                                            <h5 data-bs-toggle="tooltip" data-bs-placement="bottom" title="@product.fullname">@product.ProductName</h5>
+                                            <p>@product.Description</p>
+                                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                                <p class="text-dark fs-6 fw-bold mb-0 ">@product.Price</p>
+                                                @{
+                                                    /*add to cart*/
+                                                }
+                                                <input type="hidden" class="quantity" value="1" />
+                                                <button class="add-to-cart btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i>Add to cart</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            }
+                            <div class="col-12">
+                                <div class="pagination d-flex justify-content-center mt-5">
+                                    <nav aria-label="Page navigation">
+                                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, categoriesId = ViewBag.CategoryId, SearchString = ViewBag.SearchString }),
+                                                 new PagedListRenderOptions
+                                        {
+                                            LiElementClasses = new string[] { "rounded" },
+                                            PageClasses = new string[] { "rounded" },
+                                            UlElementClasses = new string[] { "pagination d-flex" },
+                                            ContainerDivClasses = new string[] { "pagination d-flex justify-content-center mt-5" },
+                                            DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                                            DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                                            DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                            DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                                            LinkToFirstPageFormat = "«",
+                                            LinkToLastPageFormat = "»",
+                                            ActiveLiElementClass = "active"
+                                        })
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fruits Shop End -->
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+<script>
+    // Đánh dấu menu Cửa Hàng là active
+    document.getElementById("CuaHang").classList.add("active");
+</script>

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Trang chủ của shop";
     Layout = "~/Views/Shared/customer/_Layout.cshtml";
 }
 
@@ -73,11 +73,11 @@
                         </li>
                         @foreach (var item in ViewBag.DanhMucs)
                         {
-                            <li class="nav-item">
-                                <a class="d-flex py-2 m-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-@item.CategoryId">
-                                    <span class="text-dark" style="width: 130px;">@item.CategoryName</span>
-                                </a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="d-flex py-2 m-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-@item.CategoryId">
+                                        <span class="text-dark" style="width: 130px;">@item.CategoryName</span>
+                                    </a>
+                                </li>
                         }
 
                     </ul>
@@ -94,23 +94,28 @@
                                 @foreach (var product in ViewBag.NewProducts)
                                 {
 
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <div class="rounded position-relative fruite-item">
-                                            <a asp-action="ProductDetail" asp-route-id="@product.ProductId">
-                                                <div class="fruite-img" style="width: 100%; height: 230px; overflow: hidden; position: relative;">
-                                                    <img src="@Url.Content(product.img)" alt="@product.ProductName" style="width: 100%; height: 100%; object-fit: cover;">
-                                                </div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                        <div class="col-md-6 col-lg-4 col-xl-3">
+                                            <div class="rounded position-relative fruite-item">
+                                                <a asp-controller="Shop" asp-action="ProductDetail" asp-route-id="@product.ProductId">
+                                                    <div class="fruite-img produc" style="width: 100%; height: 230px; overflow: hidden; position: relative;">
+                                                        <img src="@Url.Content(product.img)" alt="@product.ProductName" style="width: 100%; height: 100%; object-fit: cover;">
+                                                    </div>
+                                                </a>
+                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom" data-product-id="@product.ProductId">
                                                     <h5 data-bs-toggle="tooltip" data-bs-placement="bottom" title="@product.fullname">@product.ProductName</h5>
                                                     <p>@product.Description</p>
                                                     <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p style="width: 100%;" class="text-dark fs-5 fw-bold mb-0 d-inline-block ">@product.Price</p>
-                                                        <a class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
+                                                        <p class="text-dark fs-6 fw-bold mb-0 ">@product.Price</p>
+                                                    @{
+                                                        /*add to cart*/
+                                                    }
+                                                        <input type="hidden" class="quantity" value="1" />
+                                                        <button class="add-to-cart btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i>Add to cart</button>
                                                     </div>
                                                 </div>
-                                            </a>
+
+                                            </div>
                                         </div>
-                                    </div>
 
                                 }
 
@@ -124,45 +129,49 @@
 
                 @foreach (var item in ViewBag.DanhMucs)
                 {
-                    <div id="tab-@item.CategoryId" class="tab-pane fade show p-0">
-                        <div class="row g-4">
-                            <div class="col-lg-12">
-                                <div class="row g-4">
+                        <div id="tab-@item.CategoryId" class="tab-pane fade show p-0">
+                            <div class="row g-4">
+                                <div class="col-lg-12">
+                                    <div class="row g-4">
 
                                     @foreach (var item01 in ViewBag.List[i].Products)
                                     {
 
-                                        <div class="col-md-6 col-lg-4 col-xl-3">
-                                            <div class="rounded position-relative fruite-item">
-                                                <a asp-action="ProductDetail" asp-route-id="@item01.ProductId">
-                                                    <div class="fruite-img" style="width: 100%; height: 230px; overflow: hidden; position: relative;">
-                                                        <img src="@Url.Content(item01.img)" alt="@item01.ProductName" style="width: 100%; height: 100%; object-fit: cover;">
+                                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                                    <div class="rounded position-relative fruite-item">
+                                                        <a asp-controller="Shop" asp-action="ProductDetail" asp-route-id="@item01.ProductId">
+                                                            <div class="fruite-img" style="width: 100%; height: 230px; overflow: hidden; position: relative;">
+                                                                <img src="@Url.Content(item01.img)" alt="@item01.ProductName" style="width: 100%; height: 100%; object-fit: cover;">
+                                                            </div>
+                                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                                <h5 data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item01.fullname">@item01.ProductName</h5>
+                                                                <p>@item01.Description</p>
+                                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                                    <p class="text-dark fs-6 fw-bold mb-0 ">@item01.Price</p>
+                                                            @{
+                                                                /*add to cart*/
+                                                            }
+                                                                    <a asp-controller="Shop" asp-action="ProductDetial" asp-route-id="@item01.ProductId" class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i> Chi tiết</a>
+                                                                </div>
+                                                            </div>
+                                                        </a>
                                                     </div>
-                                                    <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                        <h5 data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item01.fullname">@item01.ProductName</h5>
-                                                        <p>@item01.Description</p>
-                                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                                            <p style="width: 100%;" class="text-dark fs-5 fw-bold mb-0 ">@item01.Price</p>
-                                                            <a class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
+                                                </div>
 
-                                    }
+                                    } 
                                     @{
                                         i++;
                                     }
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 }
                 @* Xem thêm sản phẩm *@
                 <div class="d-flex justify-content-end mt-3">
-                    <a asp-controller="Home" asp-action="Shop" class="btn btn-primary">Xem thêm sản phẩm</a>
+                    <a asp-controller="Shop" asp-action="Index" class="btn btn-primary">Xem thêm sản phẩm</a>
                 </div>
 
 
@@ -172,26 +181,52 @@
     </div>
 </div>
 <!-- Fruits Shop End-->
+
 @* Sản phẩm bán chạy *@
 <div class="container-fluid vesitable py-5">
     <div class="container py-5">
         <h1 class="mb-0">Sản phẩm bán chạy</h1>
         <div class="owl-carousel vegetable-carousel justify-content-center">
-            <div class="border border-primary rounded position-relative vesitable-item">
-                <div class="vesitable-img">
-                    <img src="img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
-                </div>
-                <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-                <div class="p-4 rounded-bottom">
-                    <h4>Parsely</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                    <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                    </div>
-                </div>
-            </div>
+
+
+            @foreach (var product in ViewBag.TopProducts)
+            {
+                        <div class="col">
+                        <a asp-controller="Shop" asp-action="ProductDetail" asp-route-id="@product.ProductId">
+                                <div class="border border-primary rounded position-relative vesitable-item h-100">
+                                    <div class="vesitable-img">
+                                        <img src="@Url.Content(product.ImageUrl)" class="img-fluid rounded-top" alt="" style="max-height: 200px; object-fit: cover;">
+                                    </div>
+                                    <div class="text-white bg-danger px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">hot</div>
+                                    <div class="p-4 rounded-bottom">
+                                        <h4 class="text-dark">@product.ProductName</h4>
+                                        <p class="text-dark">@product.Description</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                    @{
+                                        /*add to cart*/
+                                    }
+                                        <a asp-controller="Shop" asp-action="ProductDetial" asp-route-id="@product.ProductId" class="btn border border-secondary rounded-pill px-3 text-primary mt-2">
+                                            <i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng
+                                        </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+
+
+
+
+            }
+
 
         </div>
     </div>
 </div>
+
+
+
+<script>
+    document.getElementById("TrangChu").classList.add("active")
+</script>

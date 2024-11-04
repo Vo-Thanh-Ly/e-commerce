@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Sell__cleaning_services_e_commerce.Data;
 using Sell_​_cleaning_services_e_commerce.Models;
+using Sell__cleaning_services_e_commerce.Models.ViewModel;
 using System.Diagnostics;
 
 namespace Sell_​_cleaning_services_e_commerce.Controllers
@@ -25,11 +26,11 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
 
             var newProducts = products.Select(p => new ProductTemp
             {
-                ProductName = p.ProductName.Length > 20 ? p.ProductName.Substring(0, 20) + "..." : p.ProductName,
+                ProductName = p.ProductName.Length > 15 ? p.ProductName.Substring(0, 15) + "..." : p.ProductName,
                 fullname = p.ProductName,
                 ProductId = p.ProductId.ToString(),
-                Description = p.Description.Length > 100 ? p.Description.Substring(0, 100) + "..." : p.Description,
-                Price = p.Price,
+                Description = p.Description.Length > 40 ? p.Description.Substring(0, 40) + "..." : p.Description,
+                Price = (int)p.Price,
                 img = p.ProductImages.Any()
                     ? p.ProductImages.FirstOrDefault()?.ImageUrl ?? "/image/products/default/default.jpg"
                     : "/image/products/default/default.jpg"
@@ -50,11 +51,11 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
                             .ToList();
                 var Products01 = product.Select(p => new ProductTemp
                 {
-                    ProductName = p.ProductName.Length > 20 ? p.ProductName.Substring(0, 20) + "..." : p.ProductName,
+                    ProductName = p.ProductName.Length > 15 ? p.ProductName.Substring(0, 15) + "..." : p.ProductName,
                     fullname = p.ProductName,
                     ProductId = p.ProductId.ToString(),
-                    Description = p.Description.Length > 100 ? p.Description.Substring(0, 100) + "..." : p.Description,
-                    Price = p.Price,
+                    Description = p.Description.Length > 40 ? p.Description.Substring(0, 40) + "..." : p.Description,
+                    Price = (int)p.Price,
                     img = p.ProductImages.Any()
                         ? p.ProductImages.FirstOrDefault()?.ImageUrl ?? "/image/products/default/default.jpg"
                         : "/image/products/default/default.jpg"
@@ -67,14 +68,40 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
             ViewBag.List = List;
 
 
-            //Máy hút bụi
-
-            //Máy đánh sàn
-
-            //Dụng cụ cầm tay
-
             //Sản phẩm nối bật
-            //sản phẩm mới
+            // Lấy 10 sản phẩm có số lượng bán ra cao nhất
+            var topProducts = _context.InvoiceDetails
+                .GroupBy(id => id.ProductId)
+                .Select(g => new
+                {
+                    ProductId = g.Key,
+                    TotalQuantitySold = g.Sum(id => id.Quantity)
+                })
+                .OrderByDescending(p => p.TotalQuantitySold)
+                .Take(10)
+                .ToList();
+
+            // Lấy thông tin chi tiết sản phẩm từ bảng Product
+            var topProductDetails = topProducts
+                .Join(_context.Products,
+                      tp => tp.ProductId,
+                      p => p.ProductId,
+                      (tp, p) => new
+                      {
+                          p.ProductId,
+                          ProductName = p.ProductName.Length > 15 ? p.ProductName.Substring(0, 15) + "..." : p.ProductName,
+                          Description = p.Description.Length > 40 ? p.Description.Substring(0, 40) + "..." : p.Description,
+                          Price = (int)p.Price,
+                          TotalSold = tp.TotalQuantitySold,
+                          ImageUrl = p.ProductImages.Any()
+                                     ? p.ProductImages.FirstOrDefault().ImageUrl
+                                     : "/image/products/default/default.jpg"
+                      })
+                .ToList();
+
+            // Truyền danh sách sản phẩm vào ViewBag để hiển thị ra view
+            ViewBag.TopProducts = topProductDetails;
+
 
             return View();
         }
@@ -91,19 +118,10 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
         }
     }
 
-    class ProductTemp
-    {
-        public String ProductName { get; set; }
-        public String ProductId { get; set; }
-
-        public String Description { get; set; }
-        public decimal Price { get; set; }
-        public string img { get; set; }
-        public string fullname { get; set; }
-    }
 
     class productForCatelogies
     {
         public List<ProductTemp> Products { get; set; } = new List<ProductTemp>();
     }
+
 }

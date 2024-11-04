@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Sell_​_cleaning_services_e_commerce.Models
 {
+
     public partial class InvoiceDetail
     {
         [Key]
@@ -14,8 +15,8 @@ namespace Sell_​_cleaning_services_e_commerce.Models
 
         public int Quantity { get; set; }
 
-        [Column(TypeName = "decimal(18, 2)")]
-        public decimal UnitPrice { get; set; }
+
+        public double UnitPrice { get; set; }
 
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Total { get; set; }
@@ -27,5 +28,7 @@ namespace Sell_​_cleaning_services_e_commerce.Models
         [ForeignKey("ProductId")]
         [InverseProperty("InvoiceDetails")]
         public virtual Product Product { get; set; }
+        public double Price { get; internal set; }
     }
+
 }

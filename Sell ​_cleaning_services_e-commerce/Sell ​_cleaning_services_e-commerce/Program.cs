@@ -5,11 +5,6 @@ using Sell_​_cleaning_services_e_commerce.Data;
 using Sell__cleaning_services_e_commerce.Areas.Other;
 using Sell__cleaning_services_e_commerce.Models;
 using Sell__cleaning_services_e_commerce.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.EntityFrameworkCore;
 using Sell__cleaning_services_e_commerce.Areas.MailService;
 
 
@@ -37,6 +32,10 @@ builder.Services.Configure<IISServerOptions>(options =>
     options.MaxRequestBodySize = int.MaxValue; // or any other value
 });
 
+
+builder.Services.AddSingleton<IVnPayService, VnPayService>();
+
+
 builder.Services.Configure<KestrelServerOptions>(options =>
 {
     options.Limits.MaxRequestBodySize = int.MaxValue; // or any other value
@@ -49,6 +48,13 @@ builder.Services.Configure<KestrelServerOptions>(options =>
 //        .Build();
 //});
 
+// Cấu hình session
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Thời gian hết hạn của session
+    options.Cookie.HttpOnly = true; // Bảo mật cookie
+    options.Cookie.IsEssential = true; // Cần thiết cho hoạt động của session
+});
 
 
 //builder.Services.AddControllers(config =>

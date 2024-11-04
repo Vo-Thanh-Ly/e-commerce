@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "T:\\UDTM_Dien_Tu\\e-commerce-main\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj": {}
+    "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj": {}
   },
   "projects": {
-    "T:\\UDTM_Dien_Tu\\e-commerce-main\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj": {
+    "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "T:\\UDTM_Dien_Tu\\e-commerce-main\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj",
+        "projectUniqueName": "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj",
         "projectName": "Sell ​_cleaning_services_e-commerce",
-        "projectPath": "T:\\UDTM_Dien_Tu\\e-commerce-main\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj",
-        "packagesPath": "C:\\Users\\tienl\\.nuget\\packages\\",
-        "outputPath": "T:\\UDTM_Dien_Tu\\e-commerce-main\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\obj\\",
+        "projectPath": "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj",
+        "packagesPath": "C:\\Users\\votha\\.nuget\\packages\\",
+        "outputPath": "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\tienl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\votha\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -72,7 +72,7 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[8.0.5, )"
+              "version": "[8.0.6, )"
             },
             "X.PagedList": {
               "target": "Package",

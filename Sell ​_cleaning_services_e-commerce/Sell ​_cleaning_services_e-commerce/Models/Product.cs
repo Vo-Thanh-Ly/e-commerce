@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Sell_​_cleaning_services_e_commerce.Models
 {
+
     public partial class Product
     {
         [Key]
@@ -23,9 +24,9 @@ namespace Sell_​_cleaning_services_e_commerce.Models
 
         [Required(ErrorMessage = "Giá sản phẩm là bắt buộc.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Giá sản phẩm phải lớn hơn 0.")]
-        [Column(TypeName = "decimal(18, 2)")]
+        [Column(TypeName = "decimal(18, 0)")]
         [Display(Name = "Giá")]
-        public decimal Price { get; set; }
+        public double Price { get; set; }
 
         [Required(ErrorMessage = "Số lượng tồn kho là bắt buộc.")]
         [Range(0, int.MaxValue, ErrorMessage = "Số lượng tồn kho phải lớn hơn hoặc bằng 0.")]
@@ -90,7 +91,7 @@ namespace Sell_​_cleaning_services_e_commerce.Models
         [Display(Name = "Ngày cập nhật cuối")]
         public DateTime? LastUpdatedDate { get; set; }
 
-        [Display(Name = "Ngừng kinh doanh")]
+        [Display(Name = "Đang kinh doanh")]
         public bool IsDiscontinued { get; set; }
 
         [ForeignKey("CategoryId")]
