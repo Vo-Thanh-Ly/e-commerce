@@ -8224,23 +8224,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\tienl\\.nuget\\packages\\": {},
+    "C:\\Users\\ADMIN\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "T:\\UDTM_Dien_Tu\\e-commerce-main\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj",
+      "projectUniqueName": "C:\\Users\\ADMIN\\Source\\Repos\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj",
       "projectName": "Sell ​_cleaning_services_e-commerce",
-      "projectPath": "T:\\UDTM_Dien_Tu\\e-commerce-main\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj",
-      "packagesPath": "C:\\Users\\tienl\\.nuget\\packages\\",
-      "outputPath": "T:\\UDTM_Dien_Tu\\e-commerce-main\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\obj\\",
+      "projectPath": "C:\\Users\\ADMIN\\Source\\Repos\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj",
+      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ADMIN\\Source\\Repos\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\tienl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -8262,11 +8262,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -8325,7 +8320,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
