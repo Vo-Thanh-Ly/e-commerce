@@ -1,14 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "T:\\UDTM_Dien_Tu\\e-commerce-main\\Sell \u200B_cleaning_services_e-commerce\\",
+  "WorkspaceRootPath": "C:\\Users\\votha\\source\\repos\\Vo-Thanh-Ly\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|t:\\udtm_dien_tu\\e-commerce-main\\sell \u200B_cleaning_services_e-commerce\\sell \u200B_cleaning_services_e-commerce\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|solutionrelative:sell \u200B_cleaning_services_e-commerce\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|c:\\users\\votha\\source\\repos\\vo-thanh-ly\\e-commerce\\sell \u200B_cleaning_services_e-commerce\\sell \u200B_cleaning_services_e-commerce\\controllers\\shoppingcartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|solutionrelative:sell \u200B_cleaning_services_e-commerce\\controllers\\shoppingcartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|t:\\udtm_dien_tu\\e-commerce-main\\sell \u200B_cleaning_services_e-commerce\\sell \u200B_cleaning_services_e-commerce\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|solutionrelative:sell \u200B_cleaning_services_e-commerce\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|c:\\users\\votha\\source\\repos\\vo-thanh-ly\\e-commerce\\sell \u200B_cleaning_services_e-commerce\\sell \u200B_cleaning_services_e-commerce\\views\\shoppingcart\\checkout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|solutionrelative:sell \u200B_cleaning_services_e-commerce\\views\\shoppingcart\\checkout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|c:\\users\\votha\\source\\repos\\vo-thanh-ly\\e-commerce\\sell \u200B_cleaning_services_e-commerce\\sell \u200B_cleaning_services_e-commerce\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|solutionrelative:sell \u200B_cleaning_services_e-commerce\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|c:\\users\\votha\\source\\repos\\vo-thanh-ly\\e-commerce\\sell \u200B_cleaning_services_e-commerce\\sell \u200B_cleaning_services_e-commerce\\areas\\identity\\pages\\account\\registerconfirmation.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|solutionrelative:sell \u200B_cleaning_services_e-commerce\\areas\\identity\\pages\\account\\registerconfirmation.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|c:\\users\\votha\\source\\repos\\vo-thanh-ly\\e-commerce\\sell \u200B_cleaning_services_e-commerce\\sell \u200B_cleaning_services_e-commerce\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|solutionrelative:sell \u200B_cleaning_services_e-commerce\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,29 +50,77 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "T:\\UDTM_Dien_Tu\\e-commerce-main\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "Sell \u200B_cleaning_services_e-commerce\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "T:\\UDTM_Dien_Tu\\e-commerce-main\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "Sell \u200B_cleaning_services_e-commerce\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\votha\\Source\\Repos\\Vo-Thanh-Ly\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Sell \u200B_cleaning_services_e-commerce\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\votha\\Source\\Repos\\Vo-Thanh-Ly\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Sell \u200B_cleaning_services_e-commerce\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-30T18:25:19.061Z",
+              "WhenOpened": "2024-11-08T17:43:01.664Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "T:\\UDTM_Dien_Tu\\e-commerce-main\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\appsettings.json",
-              "RelativeDocumentMoniker": "Sell \u200B_cleaning_services_e-commerce\\appsettings.json",
-              "ToolTip": "T:\\UDTM_Dien_Tu\\e-commerce-main\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\appsettings.json",
-              "RelativeToolTip": "Sell \u200B_cleaning_services_e-commerce\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-09-30T17:49:11.923Z",
+              "Title": "Checkout.cshtml",
+              "DocumentMoniker": "C:\\Users\\votha\\source\\repos\\Vo-Thanh-Ly\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Views\\ShoppingCart\\Checkout.cshtml",
+              "RelativeDocumentMoniker": "Sell \u200B_cleaning_services_e-commerce\\Views\\ShoppingCart\\Checkout.cshtml",
+              "ToolTip": "C:\\Users\\votha\\source\\repos\\Vo-Thanh-Ly\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Views\\ShoppingCart\\Checkout.cshtml*",
+              "RelativeToolTip": "Sell \u200B_cleaning_services_e-commerce\\Views\\ShoppingCart\\Checkout.cshtml*",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAEMAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-08T16:04:36.724Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ShoppingCartController.cs",
+              "DocumentMoniker": "C:\\Users\\votha\\source\\repos\\Vo-Thanh-Ly\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Controllers\\ShoppingCartController.cs",
+              "RelativeDocumentMoniker": "Sell \u200B_cleaning_services_e-commerce\\Controllers\\ShoppingCartController.cs",
+              "ToolTip": "C:\\Users\\votha\\source\\repos\\Vo-Thanh-Ly\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Controllers\\ShoppingCartController.cs*",
+              "RelativeToolTip": "Sell \u200B_cleaning_services_e-commerce\\Controllers\\ShoppingCartController.cs*",
+              "ViewState": "AgIAAOoAAAAAAAAAAAAIwOgAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T19:32:58.21Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RegisterConfirmation.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\votha\\source\\repos\\Vo-Thanh-Ly\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Areas\\Identity\\Pages\\Account\\RegisterConfirmation.cshtml.cs",
+              "RelativeDocumentMoniker": "Sell \u200B_cleaning_services_e-commerce\\Areas\\Identity\\Pages\\Account\\RegisterConfirmation.cshtml.cs",
+              "ToolTip": "C:\\Users\\votha\\source\\repos\\Vo-Thanh-Ly\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Areas\\Identity\\Pages\\Account\\RegisterConfirmation.cshtml.cs",
+              "RelativeToolTip": "Sell \u200B_cleaning_services_e-commerce\\Areas\\Identity\\Pages\\Account\\RegisterConfirmation.cshtml.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABgAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T19:30:32.31Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Register.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\votha\\source\\repos\\Vo-Thanh-Ly\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "RelativeDocumentMoniker": "Sell \u200B_cleaning_services_e-commerce\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "ToolTip": "C:\\Users\\votha\\source\\repos\\Vo-Thanh-Ly\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "RelativeToolTip": "Sell \u200B_cleaning_services_e-commerce\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "ViewState": "AgIAAHkAAAAAAAAAAAAAwIoAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T19:26:59.296Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 871,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]
         }

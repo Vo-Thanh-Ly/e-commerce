@@ -1,10 +1,17 @@
 ﻿@model string
 
-@if (!String.IsNullOrEmpty(Model))
+@if (!string.IsNullOrEmpty(Model))
 {
-    var statusMessageClass = Model.StartsWith("Error") ? "danger" : "success";
-    <div class="alert alert-@statusMessageClass alert-dismissible" role="alert">
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        @Model
+    // Xác định lớp cảnh báo (alert) dựa vào tiền tố của thông báo
+    var alertType = Model.StartsWith("Error") ? "danger"
+                  : Model.StartsWith("Info") ? "info"
+                  : "success";
+
+    <div class="alert alert-@alertType alert-dismissible fade show" role="alert">
+        <!-- Nút đóng thông báo -->
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Đóng"></button>
+
+        <!-- Nội dung thông báo -->
+        <span>@Model</span>
     </div>
 }

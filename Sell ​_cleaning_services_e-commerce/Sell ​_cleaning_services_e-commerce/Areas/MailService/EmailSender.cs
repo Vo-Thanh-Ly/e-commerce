@@ -7,9 +7,11 @@ namespace Sell_​_cleaning_services_e_commerce.Areas.MailService
     {
         public Task SendEmailAsync(string email, string subject, string message)
         {
-            var mailServer = "mail@gmail.com";
+            //var mailServer = "mail@gmail.com";
 
-            var pw = "pw pw pw pw";
+            //var pw = "pw pw pw pw";
+
+       
 
             var client = new SmtpClient("smtp.gmail.com", 587)
             {

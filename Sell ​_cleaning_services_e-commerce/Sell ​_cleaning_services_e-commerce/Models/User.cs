@@ -11,5 +11,7 @@ namespace Sell_​_cleaning_services_e_commerce.Models
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }
         public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
+        public string? Address { get; set; }
+        public string? Nomalname { get;set; }
     }
 }

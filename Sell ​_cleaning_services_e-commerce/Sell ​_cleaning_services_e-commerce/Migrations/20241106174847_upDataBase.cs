@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Sell_​_cleaning_services_e_commerce.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateRolePrimaryKey : Migration
+    public partial class upDataBase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -74,6 +74,8 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                     Sex = table.Column<bool>(type: "bit", nullable: true),
                     DateOfBirth = table.Column<DateOnly>(type: "date", nullable: true),
                     Avatar = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nomalname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -103,7 +105,7 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                     ProductName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
                     QuantityInStock = table.Column<int>(type: "int", nullable: false),
                     Brand = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Supplier = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -130,31 +132,6 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Payments",
-                columns: table => new
-                {
-                    PaymentId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PaymentMethodId = table.Column<int>(type: "int", nullable: false),
-                    PaymentAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PaymentStatus = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PaymentDate = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
-                    TransactionId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    ResponseCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    BankCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Note = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK__Payments__9B556A38F2A55A04", x => x.PaymentId);
-                    table.ForeignKey(
-                        name: "FK__Payments__Paymen__5812160E",
-                        column: x => x.PaymentMethodId,
-                        principalTable: "PaymentMethods",
-                        principalColumn: "PaymentMethodId");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "RoleClaim",
                 columns: table => new
                 {
@@ -173,6 +150,37 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                         principalTable: "Role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Invoices",
+                columns: table => new
+                {
+                    InvoiceId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
+                    InvoiceDate = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    TotalAmount = table.Column<double>(type: "float", nullable: false),
+                    StatusId = table.Column<int>(type: "int", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK__Invoices__D796AAB5A27AD698", x => x.InvoiceId);
+                    table.ForeignKey(
+                        name: "FK_Invoices_User_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK__Invoices__Status__49C3F6B7",
+                        column: x => x.StatusId,
+                        principalTable: "InvoiceStatus",
+                        principalColumn: "StatusId");
                 });
 
             migrationBuilder.CreateTable(
@@ -335,37 +343,65 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Invoices",
+                name: "InvoiceDetails",
                 columns: table => new
                 {
-                    InvoiceId = table.Column<int>(type: "int", nullable: false)
+                    InvoiceDetailId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
-                    InvoiceDate = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
-                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    StatusId = table.Column<int>(type: "int", nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    PaymentId = table.Column<int>(type: "int", nullable: true)
+                    InvoiceId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    UnitPrice = table.Column<double>(type: "float", nullable: false),
+                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__Invoices__D796AAB5A27AD698", x => x.InvoiceId);
+                    table.PrimaryKey("PK__InvoiceD__1F157811D0C87BC2", x => x.InvoiceDetailId);
                     table.ForeignKey(
-                        name: "FK_Invoices_User_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK__InvoiceDe__Invoi__4CA06362",
+                        column: x => x.InvoiceId,
+                        principalTable: "Invoices",
+                        principalColumn: "InvoiceId");
                     table.ForeignKey(
-                        name: "FK__Invoices__Paymen__5CD6CB2B",
-                        column: x => x.PaymentId,
-                        principalTable: "Payments",
-                        principalColumn: "PaymentId");
+                        name: "FK__InvoiceDe__Produ__4D94879B",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Payments",
+                columns: table => new
+                {
+                    PaymentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    InvoiceId = table.Column<int>(type: "int", nullable: false),
+                    PaymentMethodId = table.Column<int>(type: "int", nullable: false),
+                    DeliveryFailed = table.Column<bool>(type: "bit", nullable: false),
+                    Canceled = table.Column<bool>(type: "bit", nullable: false),
+                    PaymentDate = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    TransactionId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ResponseCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    BankCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    DeliveredSussced = table.Column<bool>(type: "bit", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK__Payments__9B556A38F2A55A04", x => x.PaymentId);
                     table.ForeignKey(
-                        name: "FK__Invoices__Status__49C3F6B7",
-                        column: x => x.StatusId,
-                        principalTable: "InvoiceStatus",
-                        principalColumn: "StatusId");
+                        name: "FK__Invoices__Payment__5CD6CB2B",
+                        column: x => x.InvoiceId,
+                        principalTable: "Invoices",
+                        principalColumn: "InvoiceId");
+                    table.ForeignKey(
+                        name: "FK__Payments__PaymentMethod__5812160E",
+                        column: x => x.PaymentMethodId,
+                        principalTable: "PaymentMethods",
+                        principalColumn: "PaymentMethodId");
                 });
 
             migrationBuilder.CreateTable(
@@ -386,33 +422,6 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                         column: x => x.PaymentId,
                         principalTable: "Payments",
                         principalColumn: "PaymentId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "InvoiceDetails",
-                columns: table => new
-                {
-                    InvoiceDetailId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    InvoiceId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK__InvoiceD__1F157811D0C87BC2", x => x.InvoiceDetailId);
-                    table.ForeignKey(
-                        name: "FK__InvoiceDe__Invoi__4CA06362",
-                        column: x => x.InvoiceId,
-                        principalTable: "Invoices",
-                        principalColumn: "InvoiceId");
-                    table.ForeignKey(
-                        name: "FK__InvoiceDe__Produ__4D94879B",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "ProductId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -441,11 +450,6 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Invoices_PaymentId",
-                table: "Invoices",
-                column: "PaymentId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Invoices_StatusId",
                 table: "Invoices",
                 column: "StatusId");
@@ -454,6 +458,12 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                 name: "IX_PaymentLogs_PaymentId",
                 table: "PaymentLogs",
                 column: "PaymentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Payments_InvoiceId",
+                table: "Payments",
+                column: "InvoiceId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_PaymentMethodId",
@@ -554,7 +564,7 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                 name: "UserToken");
 
             migrationBuilder.DropTable(
-                name: "Invoices");
+                name: "Payments");
 
             migrationBuilder.DropTable(
                 name: "Products");
@@ -563,19 +573,19 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                 name: "Role");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Invoices");
 
             migrationBuilder.DropTable(
-                name: "Payments");
-
-            migrationBuilder.DropTable(
-                name: "InvoiceStatus");
+                name: "PaymentMethods");
 
             migrationBuilder.DropTable(
                 name: "Category");
 
             migrationBuilder.DropTable(
-                name: "PaymentMethods");
+                name: "User");
+
+            migrationBuilder.DropTable(
+                name: "InvoiceStatus");
         }
     }
 }

@@ -1,10 +1,19 @@
 ﻿@page
 @model LockoutModel
 @{
-    ViewData["Title"] = "Locked out";
+    ViewData["Title"] = "Tài khoản bị khóa";
 }
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">This account has been locked out, please try again later.</p>
-</header>
+<div class="container mt-5">
+    <header class="text-center">
+        <h1 class="text-danger">@ViewData["Title"]</h1>
+        <p class="text-danger">
+            Tài khoản của bạn đã bị khóa, vui lòng thử lại sau.
+        </p>
+    </header>
+
+    <div class="text-center mt-4">
+        <!-- Nút quay lại trang đăng nhập hoặc trang chủ -->
+        <a href="/Account/Login" class="btn btn-primary">Quay lại trang đăng nhập</a>
+    </div>
+</div>

@@ -1,0 +1,520 @@
+﻿@model Sell__cleaning_services_e_commerce.Models.Product
+
+@{
+    ViewData["Title"] = "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/customer/_Layout.cshtml";
+}
+
+<style>
+    .product-description {
+        margin: 5 auto;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+    }
+
+    #toggle-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        border-radius: 5px;
+    }
+
+        #toggle-button:hover {
+            background-color: #0056b3;
+        }
+
+    .star-rating {
+        display: inline-flex;
+        flex-direction: row-reverse;
+    }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            color: #ddd;
+        }
+
+            .star-rating label:before {
+                content: '\f005';
+                font-family: FontAwesome;
+            }
+
+        .star-rating input:checked ~ label {
+            color: #ffca08;
+        }
+</style>
+
+<div class="container py-5">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">@Model.Category.CategoryName</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.ProductName</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4">
+        <!-- Product Images -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                @if (ViewBag.Images != null && ViewBag.Images.Count > 0)
+                {
+                    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @for (int i = 0; i < ViewBag.Images.Count; i++)
+                            {
+                                <div class="carousel-item @(i == 0 ? "active" : "")">
+                                    <img src="@ViewBag.Images[i].ImageUrl" class="d-block w-100" alt="Product Image" style="object-fit: contain; height: 500px;">
+                                </div>
+                            }
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                }
+                else
+                {
+                    <img src="/img/no-image.jpg" class="img-fluid" alt="No Image Available">
+                }
+            </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="col-lg-6">
+            <div class="ps-lg-4">
+                <h1 class="display-6 fw-bold mb-3">@Model.ProductName</h1>
+
+                <div class="d-flex align-items-center mb-3">
+                    <div class="me-3">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            if (i <= Math.Round(ViewBag.AverageRating))
+                            {
+                                <i class="fa fa-star text-warning"></i>
+                            }
+                            else
+                            {
+                                <i class="fa fa-star-o text-warning"></i>
+                            }
+                        }
+                    </div>
+                    <span class="text-muted">(@(ViewBag.Comments?.Count ?? 0) đánh giá)</span>
+                </div>
+
+                <h2 class="display-6 fw-bold text-primary mb-4">@Model.Price VNĐ</h2>
+
+                <div class="mb-4">
+                    @if (Model.IsDiscontinued)
+                    {
+                        <span class="badge bg-danger p-2 rounded-pill">Ngừng bán</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-success p-2 rounded-pill">Còn bán</span>
+                    }
+                </div>
+
+                @* <div class="d-flex align-items-center mb-4">
+                <div class="input-group me-3" style="width: 130px;">
+                <button class="btn btn-outline-secondary" type="button" id="decreaseQuantity">
+                <i class="fa fa-minus"></i>
+                </button>
+                <input type="text" class="form-control text-center" id="quantity" value="1">
+                <button class="btn btn-outline-secondary" type="button" id="increaseQuantity">
+                <i class="fa fa-plus"></i>
+                </button>
+                </div>
+                <button class="btn btn-primary btn-lg me-2">
+                <i class="fa fa-shopping-cart me-2"></i>Thêm vào giỏ hàng
+                </button>
+                <button class="btn btn-outline-danger btn-lg">
+                <i class="fa fa-heart"></i>
+                </button>
+                </div> *@
+
+                @* <div class="product-item" data-product-id="@Model.ProductId">
+                <input type="number" class="quantity" value="1" min="1">
+                <button class="add-to-cart">
+                Thêm vào giỏ hàng
+                </button>
+                </div> *@
+
+                <div class="product-item d-flex flex-column align-items-center p-3 border rounded shadow-sm" data-product-id="@Model.ProductId">
+                    <input type="number" class="quantity form-control mb-2" value="1" min="1">
+                    <button class="add-to-cart btn btn-primary">
+                        Thêm vào giỏ hàng
+                    </button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Details Tabs -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <ul class="nav nav-pills mb-4" role="tablist">
+                        <li class="nav-item me-2">
+                            <a class="nav-link active px-4" data-bs-toggle="pill" href="#home">Mô tả</a>
+                        </li>
+                        <li class="nav-item me-2">
+                            <a class="nav-link px-4" data-bs-toggle="pill" href="#menu1">Thông số kỹ thuật</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-4" data-bs-toggle="pill" href="#menu2">Đánh giá</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <!-- Description Tab -->
+                        @*   <div id="home" class="tab-pane fade show active">
+                        <p class="lead">@Html.Raw(@Model.Description)</p>
+                        </div> *@
+
+                        <div id="home" class="tab-pane fade show active">
+                            <div class="product-description">
+                                <h2>Mô tả sản phẩm</h2>
+                                <div id="short-description">
+                                    @if (!string.IsNullOrEmpty(Model.Description) && Model.Description.Length > 150)
+                                    {
+                                        @Html.Raw(Model.Description.Substring(0, 150) + "...") <!-- Hiển thị 150 ký tự đầu tiên -->
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw(Model.Description) <!-- Hiển thị toàn bộ nếu nhỏ hơn 150 ký tự -->
+                                    }
+                                </div>
+                                <div id="full-description" style="display: none;">
+                                    @Html.Raw(Model.Description) <!-- Hiển thị toàn bộ mô tả -->
+                                </div>
+                                @if (!string.IsNullOrEmpty(Model.Description) && Model.Description.Length > 150)
+                                {
+                                    <button id="toggle-button" class="btn btn-primary" onclick="toggleDescription()">Xem thêm</button>
+                                }
+                            </div>
+                        </div>
+
+
+                        <!-- Specifications Tab -->
+                        <div id="menu1" class="tab-pane fade">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row" class="col-sm-3">
+                                                @Html.DisplayNameFor(model => model.QuantityInStock)
+                                            </th>
+                                            <td class="col-sm-9">
+                                                @Html.DisplayFor(model => model.QuantityInStock)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="col-sm-3">
+                                                @Html.DisplayNameFor(model => model.Brand)
+                                            </th>
+                                            <td class="col-sm-9">
+                                                @Html.DisplayFor(model => model.Brand)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="col-sm-3">
+                                                @Html.DisplayNameFor(model => model.Supplier)
+                                            </th>
+                                            <td class="col-sm-9">
+                                                @Html.DisplayFor(model => model.Supplier)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="col-sm-3">
+                                                @Html.DisplayNameFor(model => model.Weight)
+                                            </th>
+                                            <td class="col-sm-9">
+                                                @Html.DisplayFor(model => model.Weight)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="col-sm-3">
+                                                @Html.DisplayNameFor(model => model.Dimensions)
+                                            </th>
+                                            <td class="col-sm-9">
+                                                @Html.DisplayFor(model => model.Dimensions)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="col-sm-3">
+                                                @Html.DisplayNameFor(model => model.Material)
+                                            </th>
+                                            <td class="col-sm-9">
+                                                @Html.DisplayFor(model => model.Material)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="col-sm-3">
+                                                @Html.DisplayNameFor(model => model.Power)
+                                            </th>
+                                            <td class="col-sm-9">
+                                                @Html.DisplayFor(model => model.Power)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="col-sm-3">
+                                                @Html.DisplayNameFor(model => model.PowerSource)
+                                            </th>
+                                            <td class="col-sm-9">
+                                                @Html.DisplayFor(model => model.PowerSource)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="col-sm-3">
+                                                @Html.DisplayNameFor(model => model.ManufactureDate)
+                                            </th>
+                                            <td class="col-sm-9">
+                                                @Html.DisplayFor(model => model.ManufactureDate)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="col-sm-3">
+                                                @Html.DisplayNameFor(model => model.Origin)
+                                            </th>
+                                            <td class="col-sm-9">
+                                                @Html.DisplayFor(model => model.Origin)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="col-sm-3">
+                                                @Html.DisplayNameFor(model => model.WarrantyPeriod)
+                                            </th>
+                                            <td class="col-sm-9">
+                                                @Html.DisplayFor(model => model.WarrantyPeriod)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="col-sm-3">
+                                                @Html.DisplayNameFor(model => model.CreatedDate)
+                                            </th>
+                                            <td class="col-sm-9">
+                                                @Html.DisplayFor(model => model.CreatedDate)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="col-sm-3">
+                                                @Html.DisplayNameFor(model => model.LastUpdatedDate)
+                                            </th>
+                                            <td class="col-sm-9">
+                                                @Html.DisplayFor(model => model.LastUpdatedDate)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="col-sm-3">
+                                                @Html.DisplayNameFor(model => model.Category)
+                                            </th>
+                                            <td class="col-sm-9">
+                                                @Html.DisplayFor(model => model.Category.CategoryName)
+                                            </td>
+                                        </tr>
+                                        <!-- Additional specifications... -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <div id="menu2" class="tab-pane fade">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <form asp-controller="Shop" asp-action="PostComment" method="post" class="form-control shadow">
+                                    <h4 class="mb-5 fw-bold">Bình luận</h4>
+                                    <div class="row g-4">
+                                        <div class="col-lg-12">
+                                            <div class="border-bottom rounded my-4">
+                                                <textarea name="content"
+                                                          class="form-control border-0"
+                                                          cols="30"
+                                                          rows="8"
+                                                          placeholder="Comment của bạn , lưu ý bạn phải đánh giá số sao để bình luận thành công"
+                                                          spellcheck="false"
+                                                          required></textarea>
+                                                <div class="invalid-feedback">
+                                                    Vui lòng nhập nội dung bình luận
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="d-flex justify-content-between py-3 mb-5">
+                                                <div class="d-flex align-items-center">
+                                                    <p class="mb-0 me-3">Đánh giá: *</p>
+                                                    <div class="d-flex align-items-center star-rating" style="font-size: 12px;">
+                                                        <input type="radio" name="rating" value="1" id="star1" required>
+                                                        <label for="star1"><i class="fa fa-star"></i></label>
+                                                        <input type="radio" name="rating" value="2" id="star2">
+                                                        <label for="star2"><i class="fa fa-star"></i></label>
+                                                        <input type="radio" name="rating" value="3" id="star3">
+                                                        <label for="star3"><i class="fa fa-star"></i></label>
+                                                        <input type="radio" name="rating" value="4" id="star4">
+                                                        <label for="star4"><i class="fa fa-star"></i></label>
+                                                        <input type="radio" name="rating" value="5" id="star5">
+                                                        <label for="star5"><i class="fa fa-star"></i></label>
+                                                    </div>
+                                                    <div class="invalid-feedback ms-2">
+                                                        Vui lòng chọn số sao đánh giá
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="productId" value="@Model.ProductId" />
+                                                <button type="submit"
+                                                        class="btn border border-secondary text-primary rounded-pill px-4 py-3">
+                                                    Gửi bình luận
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            }
+                            else
+                            {
+                                <div class="form-control shadow">
+                                    <h4 class="mb-5 fw-bold">Bình luận</h4>
+                                    <div class="text-center py-5">
+                                        <p class="mb-4">Vui lòng đăng nhập để bình luận</p>
+                                        <a asp-area="Identity"
+                                           asp-page="/Account/Login"
+                                           asp-route-returnUrl="@Context.Request.Path"
+                                           class="btn border border-secondary text-primary rounded-pill px-4 py-3">
+                                            Đăng nhập để bình luận
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                            @foreach (var comment in ViewBag.Comments)
+                            {
+                                <div class="card border-0 shadow-sm mb-3 hover">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <h6 class="fw-bold mb-0">@comment.UserName</h6>
+                                            <small class="text-muted">@comment.CreatedDate.ToString("dd/MM/yyyy")</small>
+                                        </div>
+                                        <div class="mb-2">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= comment.Rating)
+                                                {
+                                                    <i class="fa fa-star text-warning"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-star-o text-warning"></i>
+                                                }
+                                            }
+                                        </div>
+                                        <p class="mb-0">@comment.Content</p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //nút tăng giảm số sản phẩm
+    document.getElementById('decreaseQuantity').addEventListener('click', function () {
+        var quantityInput = document.getElementById('quantity');
+        var currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+        }
+    });
+
+    document.getElementById('increaseQuantity').addEventListener('click', function () {
+        var quantityInput = document.getElementById('quantity');
+        var currentValue = parseInt(quantityInput.value);
+        quantityInput.value = currentValue + 1;
+    });
+    document.getElementById("CuaHang").classList.add("active")
+
+
+
+    //Desciption thu phóng
+    function toggleDescription() {
+        var fullText = document.getElementById("full-description");
+        var shortText = document.getElementById("short-description");
+        var button = document.getElementById("toggle-button");
+
+        if (fullText.style.display === "none") {
+            fullText.style.display = "block"; // Hiển thị toàn bộ mô tả
+            shortText.style.display = "none"; // Ẩn phần mô tả ngắn
+            button.textContent = "Thu gọn";   // Đổi nút thành "Thu gọn"
+        } else {
+            fullText.style.display = "none";  // Ẩn phần mô tả đầy đủ
+            shortText.style.display = "block"; // Hiển thị phần mô tả ngắn
+            button.textContent = "Xem thêm";  // Đổi nút thành "Xem thêm"
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const stars = document.querySelectorAll('.star-rating input');
+        stars.forEach(star => {
+            star.addEventListener('mouseover', function () {
+                let rating = this.value;
+                highlightStars(rating);
+            });
+            star.addEventListener('mouseout', function () {
+                resetStars();
+            });
+        });
+
+        function highlightStars(rating) {
+            stars.forEach(star => {
+                star.nextElementSibling.style.color = star.value <= rating ? '#ffca08' : '#ddd';
+            });
+        }
+
+        function resetStars() {
+            const checkedStar = document.querySelector('.star-rating input:checked');
+            if (checkedStar) {
+                highlightStars(checkedStar.value);
+            } else {
+                stars.forEach(star => {
+                    star.nextElementSibling.style.color = '#ddd';
+                });
+            }
+        }
+    });
+    // Kích hoạt validation của Bootstrap
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>

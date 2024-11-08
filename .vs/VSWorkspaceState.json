@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Sell \u200B_cleaning_services_e-commerce",
+    "\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce",
+    "\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Data"
   ],
-  "SelectedNode": "\\Sell \u200B_cleaning_services_e-commerce.sln",
+  "SelectedNode": "\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Data\\ApplicationDbContext.cs",
   "PreviewInSolutionExplorer": false
 }

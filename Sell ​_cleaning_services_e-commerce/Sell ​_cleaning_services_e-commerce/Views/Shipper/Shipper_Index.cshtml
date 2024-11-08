@@ -1,0 +1,156 @@
+﻿@model IEnumerable<Sell__cleaning_services_e_commerce.Models.Payment>
+@{
+    ViewData["Title"] = "Quản Lý Đơn Hàng";
+    Layout = "~/Views/Shared/admin/_Layout.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h3 mb-0">Đơn Hàng Đang Giao</h2>
+        <nav class="nav nav-pills">
+            <a class="nav-link active me-2" asp-action="Shipper_Index">Đơn đang giao</a>
+            <a class="nav-link" asp-action="GetUndeliveredOrders">Đơn giao thất bại</a>
+        </nav>
+    </div>
+
+    <!-- Desktop View -->
+    <div class="table-responsive d-none d-md-block">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Khách hàng</th>
+                    <th>Liên hệ</th>
+                    <th>Thời gian</th>
+                    <th>Mã GD</th>
+                    <th>Ghi chú</th>
+                    <th>Địa chỉ</th>
+                    <th>Số tiền</th>
+                    <th>Phương thức</th>
+                    @if (!User.IsInRole("Admin"))
+                    {
+                        <th>Thao tác</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="fw-medium">@item.Invoice.FullName</div>
+                        </td>
+                        <td>
+                            <div class="text-nowrap">@item.Invoice.PhoneNumber</div>
+                        </td>
+                        <td>
+                            <div class="small">@(item.PaymentDate?.ToString("dd/MM/yyyy HH:mm") ?? "Chưa thanh toán")</div>
+                        </td>
+                        <td>
+                            <span class="badge bg-secondary">@item.TransactionId</span>
+                        </td>
+                        <td>
+                            <div class="text-truncate" style="max-width: 150px;">@item.Note</div>
+                        </td>
+                        <td>
+                            <div class="text-truncate" style="max-width: 200px;">@item.Address</div>
+                        </td>
+                        <td>
+                            <div class="fw-bold text-primary">@item.Invoice.TotalAmount.ToString("N0") đ</div>
+                        </td>
+                        <td>
+                            <span class="badge bg-info">@item.PaymentMethod.MethodName</span>
+                        </td>
+                        @if (!User.IsInRole("Admin"))
+                        {
+                            <td>
+                                <div class="btn-group">
+                                    @if (item.PaymentDate == null)
+                                    {
+                                        <a class="btn btn-success btn-sm" asp-action="CompleteDelivery" asp-route-id="@item.PaymentId">
+                                            <i class="bi bi-cash-coin me-1"></i>Giao & Thu tiền
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-primary btn-sm" asp-action="SuccessfulDelivery" asp-route-id="@item.PaymentId">
+                                            <i class="bi bi-check-circle me-1"></i>Giao thành công
+                                        </a>
+                                    }
+                                    <a class="btn btn-danger btn-sm" asp-action="FailedDelivery" asp-route-id="@item.PaymentId">
+                                        <i class="bi bi-x-circle me-1"></i>Giao thất bại
+                                    </a>
+                                </div>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Mobile View -->
+    <div class="d-md-none">
+        @foreach (var item in Model)
+        {
+            <div class="card order-card mb-3">
+                <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0">@item.Invoice.User.UserName</h6>
+                    <span class="badge bg-primary">@item.PaymentMethod.MethodName</span>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Số điện thoại:</span>
+                            <span class="fw-medium">@item.Invoice.User.PhoneNumber</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Thời gian:</span>
+                            <span>@(item.PaymentDate?.ToString("dd/MM/yyyy HH:mm") ?? "Chưa thanh toán")</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Số tiền:</span>
+                            <span class="fw-bold text-primary">@item.Invoice.TotalAmount.ToString("N0") đ</span>
+                        </div>
+                        <div class="mb-2">
+                            <span class="text-muted">Địa chỉ:</span>
+                            <p class="mb-1 mt-1">@item.Address</p>
+                        </div>
+                        @if (!string.IsNullOrEmpty(item.Note))
+                        {
+                            <div class="mb-2">
+                                <span class="text-muted">Ghi chú:</span>
+                                <p class="mb-0 mt-1">@item.Note</p>
+                            </div>
+                        }
+                    </div>
+                    @if (!User.IsInRole("Admin"))
+                    {
+                        <div class="d-grid gap-2">
+                            @if (item.PaymentDate == null)
+                            {
+                                <a class="btn btn-success action-btn" asp-action="CompleteDelivery" asp-route-id="@item.PaymentId">
+                                    <i class="bi bi-cash-coin me-2"></i>Giao hàng & Thu tiền
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-primary action-btn" asp-action="SuccessfulDelivery" asp-route-id="@item.PaymentId">
+                                    <i class="bi bi-check-circle me-2"></i>Giao hàng thành công
+                                </a>
+                            }
+                            <a class="btn btn-outline-danger action-btn" asp-action="FailedDelivery" asp-route-id="@item.PaymentId">
+                                <i class="bi bi-x-circle me-2"></i>Giao hàng thất bại
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    document.getElementById("searchInput").classList.remove("d-none");
+    document.getElementById("order").classList.add("active");
+</script>

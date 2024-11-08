@@ -71,7 +71,7 @@
         </div>
         <div class="container px-0">
             <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                <a href="index.html" class="navbar-brand">
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand">
                     <h1 class="text-primary display-6">SieuSach</h1>
                 </a>
                 <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
@@ -81,7 +81,7 @@
                 <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                     <div class="navbar-nav mx-auto">
                         <a asp-controller="Home" asp-action="index" class="nav-item nav-link active">Trang chủ</a>
-                        <a href="shop.html" class="nav-item nav-link">Cửa hàng</a>
+                        <a id="CuaHang" class="nav-link" asp-controller="Shop" asp-action="index">Cửa hàng</a>
 
                     </div>
                     <div class="d-flex m-3 me-0">
@@ -89,7 +89,7 @@
                                 data-bs-toggle="modal" data-bs-target="#searchModal">
                             <i class="fas fa-search text-primary"></i>
                         </button>
-                        <a href="#" class="position-relative me-4 my-auto">
+                        <a asp-controller="ShoppingCart" asp-action="Index" class="position-relative me-4 my-auto">
                             <i class="fa fa-shopping-bag fa-2x"></i>
                             <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
                                   style="top: -5px; left: 15px; height: 20px; min-width: 20px;"></span>
@@ -159,7 +159,7 @@
             <!-- Top Section -->
             <div class="row align-items-center pb-5 mb-4 border-bottom border-light">
                 <div class="col-md-4 mb-3 mb-md-0 text-center text-md-start">
-                    <a href="#">
+                    <a asp-controller="Home" asp-action="Index">
                         <h2 class="text-warning">SieuSach</h2>
                     </a>
                     <p class="small">Mang đến giải pháp vệ sinh hoàn hảo cho mọi môi trường.</p>
@@ -222,36 +222,11 @@
                 </div>
             </div>
 
-            <!-- Bottom Section -->
-            <div class="row mt-5 pt-4 border-top border-light">
-                <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-0">&copy; 2024 SieuSach. All Rights Reserved.</p>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <nav class="nav justify-content-center justify-content-md-end">
-                        <a class="nav-link text-light" href="">Chính Sách Bảo Mật</a>
-                        <a class="nav-link text-light" href="">Điều Khoản</a>
-                        <a class="nav-link text-light" href="">Trợ Giúp</a>
-                    </nav>
-                </div>
-            </div>
+           
         </div>
     </div>
     <!-- Footer End -->
-    <!-- Copyright Start -->
-    <div class="container-fluid copyright bg-dark py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    <span class="text-light">
-                        <a href="#"><i class="fas fa-copyright text-light me-2"></i>SieuSach</a>,
-                        Đồ án thương mại điện tử
-                    </span>
-                </div>
-
-            </div>
-        </div>
-    </div>
+  
     <!-- Copyright End -->
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top">
@@ -269,5 +244,123 @@
 
     <!-- Template Javascript -->
     <script src="~/customer/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.add-to-cart').on('click', function (e) {
+                e.preventDefault();
+                var productContainer = $(this).closest('[data-product-id]');
+                var productId = productContainer.data('product-id');
+                var quantity = productContainer.find('.quantity').val() || 1;
+
+                if (!productId) {
+                    alert('Không thể xác định sản phẩm. Vui lòng thử lại.');
+                    return;
+                }
+
+                $.ajax({
+                    url: '@Url.Action("AddToCart", "ShoppingCart")',
+                    type: 'POST',
+                    data: {
+                        productId: productId,
+                        quantity: quantity
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            alert(response.message || 'Đã thêm sản phẩm vào giỏ hàng!');
+                        } else {
+                            alert(response.message || 'Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Lỗi AJAX:', status, error);
+                        alert('Có lỗi xảy ra khi kết nối với server. Vui lòng thử lại sau.');
+                    }
+                });
+            });
+        });
+
+
+
+        $(document).ready(function () {
+            $('.quantity-input').on('change', function () {
+                var $row = $(this).closest('tr');
+                var productId = $row.data('product-id');
+                var quantity = $(this).val();
+                var price = parseFloat($(this).data('price'));
+                var total = quantity * price;
+
+                // Cập nhật tổng giá trên giao diện
+                $row.find('.item-total').text(total.toFixed(2) + ' VNĐ');
+
+                // Gửi AJAX request để cập nhật giỏ hàng
+                $.ajax({
+                    url: '@Url.Action("UpdateCartItem", "ShoppingCart")',
+                    type: 'POST',
+                    data: {
+                        productId: productId,
+                        quantity: quantity
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            console.log('Cập nhật giỏ hàng thành công');
+                            // Cập nhật tổng giá của toàn bộ giỏ hàng
+                            updateTotalPrice();
+                        } else {
+                            console.error('Lỗi khi cập nhật giỏ hàng:', response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Lỗi AJAX:', error);
+                    }
+                });
+            });
+
+            // Xử lý sự kiện xóa sản phẩm
+            $('.remove-item').on('click', function () {
+                var $row = $(this).closest('tr');
+                var productId = $row.data('product-id');
+
+                $.ajax({
+                    url: '@Url.Action("RemoveFromCart", "ShoppingCart")',
+                    type: 'POST',
+                    data: { productId: productId },
+                    success: function (response) {
+                        if (response.success) {
+                            $row.remove(); // Xóa dòng khỏi bảng
+                            updateTotalPrice(); // Cập nhật tổng giá
+                            console.log('Đã xóa sản phẩm khỏi giỏ hàng');
+                        } else {
+                            console.error('Lỗi khi xóa sản phẩm:', response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Lỗi AJAX:', error);
+                    }
+                });
+            });
+
+
+            // function updateTotalPrice() {
+            //     var total = 0;
+            //     $('.item-total').each(function () {
+            //         total += parseFloat($(this).text());
+            //     });
+            //     $('#cart-total').text(total.toFixed(2) + ' VNĐ');
+            // }
+
+
+            function updateTotalPrice() {
+                var total = 0;
+                $('.item-total').each(function () {
+                    total += parseFloat($(this).text().replace(' VNĐ', '').trim());
+                });
+                $('#cart-total').text(total.toFixed(2) + ' VNĐ');
+            }
+
+        });
+
+    </script>
 </body>
 </html>
+

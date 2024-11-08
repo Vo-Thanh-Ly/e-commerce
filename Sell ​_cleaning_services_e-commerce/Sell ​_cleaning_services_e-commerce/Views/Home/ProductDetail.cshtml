@@ -1,0 +1,94 @@
+﻿<!-- Page Preloader -->
+<div id="preloader">
+    <div class="loader"></div>
+</div>
+
+<!-- Product Details Section Begin -->
+<section class="product-details py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Product Images Section -->
+            <div class="col-lg-6">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__item mb-4">
+                        <!-- Hiển thị ảnh chính của sản phẩm -->
+                        <img class="img-fluid" src="@ViewBag.Images.FirstOrDefault()?.ImageUrl" alt="Main product image">
+                    </div>
+                    <!-- Slider các ảnh phụ -->
+                    <div class="product__details__pic__slider d-flex flex-wrap">
+                        @foreach (var image in ViewBag.Images)
+                        {
+                            <img class="img-thumbnail m-1" src="@image.ImageUrl" alt="Product image">
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- Product Info Section -->
+            <div class="col-lg-6">
+                <div class="product__details__text">
+                    <h3>@ViewBag.Product.ProductName</h3>
+                    <div class="product__details__rating mb-3">
+                        <!-- Đánh giá sao (có thể thêm logic tính sao từ dữ liệu) -->
+                        <span class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                        <span>(@ViewBag.Comment.Count() reviews)</span>
+                    </div>
+                    <div class="product__details__price mb-4">
+                        <!-- Hiển thị giá sản phẩm -->
+                        <span class="h4 text-danger">@ViewBag.Product.Price.ToString("C")</span>
+                    </div>
+                    <!-- Mô tả sản phẩm -->
+                    <p>@ViewBag.Product.Description</p>
+
+                    <!-- Số lượng sản phẩm -->
+                    <div class="product__details__quantity my-4">
+                        <div class="d-inline-flex">
+                            <input type="number" class="form-control" value="1" min="1" max="@ViewBag.Product.QuantityInStock">
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-lg">Thêm vào giỏ</a>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-lg-12">
+                <div class="product__details__tab">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#description" role="tab">Mô tả</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#comments" role="tab">Bình luận</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-4">
+                        <!-- Tab Mô tả -->
+                        <div class="tab-pane fade show active" id="description" role="tabpanel">
+                            <p>@ViewBag.Product.Description</p>
+                        </div>
+                        <!-- Tab Bình luận -->
+                        <div class="tab-pane fade" id="comments" role="tabpanel">
+                            <!-- Hiển thị các bình luận -->
+                            <div class="list-group">
+                                @foreach (var comment in ViewBag.Comment)
+                                {
+                                    <div class="list-group-item">
+                                        <h5 class="mb-1">@comment.UserId</h5>
+                                        <p class="mb-1">@comment.Content</p>
+                                        <small class="text-muted">Đánh giá: @comment.Rating</small>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Details Section End -->

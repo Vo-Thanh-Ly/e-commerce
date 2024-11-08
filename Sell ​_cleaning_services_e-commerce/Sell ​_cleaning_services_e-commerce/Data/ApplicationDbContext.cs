@@ -37,7 +37,10 @@ namespace Sell_​_cleaning_services_e_commerce.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+
             base.OnModelCreating(modelBuilder);
+            modelBuilder.UseCollation("Vietnamese_CI_AS");
 
             modelBuilder.Entity<Category>(entity =>
             {
@@ -55,18 +58,40 @@ namespace Sell_​_cleaning_services_e_commerce.Data
                     .HasConstraintName("FK__Comments__Produc__440B1D61");
             });
 
+            //modelBuilder.Entity<Invoice>(entity =>
+            //{
+            //    entity.HasKey(e => e.InvoiceId).HasName("PK__Invoices__D796AAB5A27AD698");
+
+            //    entity.Property(e => e.InvoiceDate).HasDefaultValueSql("(getdate())");
+
+            //    entity.HasOne(d => d.Payment).WithMany(p => p.Invoices).HasConstraintName("FK__Invoices__Paymen__5CD6CB2B");
+
+            //    entity.HasOne(d => d.Status).WithMany(p => p.Invoices)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        .HasConstraintName("FK__Invoices__Status__49C3F6B7");
+            //});
+
             modelBuilder.Entity<Invoice>(entity =>
             {
-                entity.HasKey(e => e.InvoiceId).HasName("PK__Invoices__D796AAB5A27AD698");
+                entity.HasKey(e => e.InvoiceId)
+                      .HasName("PK__Invoices__D796AAB5A27AD698");
 
-                entity.Property(e => e.InvoiceDate).HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.InvoiceDate)
+                      .HasDefaultValueSql("(getdate())");
 
-                entity.HasOne(d => d.Payment).WithMany(p => p.Invoices).HasConstraintName("FK__Invoices__Paymen__5CD6CB2B");
+                // Cấu hình mối quan hệ một-một
+                entity.HasOne(d => d.Payment)
+                      .WithOne(p => p.Invoice)
+                      .HasForeignKey<Payment>(d => d.InvoiceId)
+                      .OnDelete(DeleteBehavior.ClientSetNull)
+                      .HasConstraintName("FK__Invoices__Payment__5CD6CB2B");
 
-                entity.HasOne(d => d.Status).WithMany(p => p.Invoices)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Invoices__Status__49C3F6B7");
+                entity.HasOne(d => d.Status)
+                      .WithMany(p => p.Invoices)
+                      .OnDelete(DeleteBehavior.ClientSetNull)
+                      .HasConstraintName("FK__Invoices__Status__49C3F6B7");
             });
+
 
             modelBuilder.Entity<InvoiceDetail>(entity =>
             {
@@ -86,20 +111,23 @@ namespace Sell_​_cleaning_services_e_commerce.Data
                 entity.HasKey(e => e.StatusId).HasName("PK__InvoiceS__C8EE2063B74CDE81");
             });
 
+
             modelBuilder.Entity<Payment>(entity =>
             {
-                entity.HasKey(e => e.PaymentId).HasName("PK__Payments__9B556A38F2A55A04");
+                entity.HasKey(e => e.PaymentId)
+                      .HasName("PK__Payments__9B556A38F2A55A04");
 
-                entity.Property(e => e.PaymentDate).HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.PaymentDate)
+                      .HasDefaultValueSql("(getdate())");
 
-                //entity.HasOne(d => d.Invoice).WithMany(p => p.Payments)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK__Payments__Invoic__571DF1D5");
 
-                entity.HasOne(d => d.PaymentMethod).WithMany(p => p.Payments)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Payments__Paymen__5812160E");
+
+                entity.HasOne(d => d.PaymentMethod)
+                      .WithMany(p => p.Payments)
+                      .OnDelete(DeleteBehavior.ClientSetNull)
+                      .HasConstraintName("FK__Payments__PaymentMethod__5812160E");
             });
+
 
             modelBuilder.Entity<PaymentLog>(entity =>
             {

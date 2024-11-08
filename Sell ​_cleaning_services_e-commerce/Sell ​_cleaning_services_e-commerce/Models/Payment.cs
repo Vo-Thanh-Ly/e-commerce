@@ -6,46 +6,67 @@ namespace Sell_​_cleaning_services_e_commerce.Models
     public partial class Payment
     {
         [Key]
-        public int PaymentId { get; set; }
+        [Display(Name = "Mã thanh toán")]
+        public int PaymentId { get; set; }  // Khóa chính
 
-        //  public int InvoiceId { get; set; }
+        [Display(Name = "Mã hóa đơn")]
+        public int InvoiceId { get; set; }  // Khóa ngoại đến Invoice
 
+        [Display(Name = "Mã phương thức thanh toán")]
         public int PaymentMethodId { get; set; }
 
-        [Column(TypeName = "decimal(18, 2)")]
-        public decimal PaymentAmount { get; set; }
+        [Required]
+        [Display(Name = "Giao thất bại")]
+        public Boolean DeliveryFailed { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string PaymentStatus { get; set; }
+        [Display(Name = "Đã hủy")]
+        public Boolean Canceled { get; set; }
 
         [Column(TypeName = "datetime")]
+        [Display(Name = "Ngày thanh toán")]
         public DateTime? PaymentDate { get; set; }
 
         [StringLength(100)]
+        [Display(Name = "Mã giao dịch")]
         public string TransactionId { get; set; }
 
         [StringLength(10)]
+        [Display(Name = "Mã phản hồi")]
         public string ResponseCode { get; set; }
 
         [StringLength(20)]
+        [Display(Name = "Mã ngân hàng")]
         public string BankCode { get; set; }
 
+        [Required]
+        [Display(Name = "Trạng thái giao hàng")]
+        public Boolean DeliveredSussced { get; set; }
+
+        [Required]
+        [Display(Name = "Số điện thoại")]
+        [DataType(DataType.PhoneNumber)]
+        public String PhoneNumber { get; set; }
+
         [StringLength(255)]
+        [Display(Name = "Ghi chú")]
         public string Note { get; set; }
 
-        //[ForeignKey("InvoiceId")]
-        //[InverseProperty("Payments")]
-        //public virtual Invoice Invoice { get; set; }
+        [StringLength(300)]
+        [Display(Name = "Địa chỉ")]
+        public string Address { get; set; }
 
-        [InverseProperty("Payment")]
-        public virtual ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
-
-        [InverseProperty("Payment")]
-        public virtual ICollection<PaymentLog> PaymentLogs { get; set; } = new List<PaymentLog>();
+        [ForeignKey("InvoiceId")]
+        [Display(Name = "Hóa đơn")]
+        public virtual Invoice Invoice { get; set; }  // Navigation property đến Invoice
 
         [ForeignKey("PaymentMethodId")]
         [InverseProperty("Payments")]
+        [Display(Name = "Phương thức thanh toán")]
         public virtual PaymentMethod PaymentMethod { get; set; }
+
+        [InverseProperty("Payment")]
+        [Display(Name = "Nhật ký thanh toán")]
+        public virtual ICollection<PaymentLog> PaymentLogs { get; set; } = new List<PaymentLog>();
     }
 }

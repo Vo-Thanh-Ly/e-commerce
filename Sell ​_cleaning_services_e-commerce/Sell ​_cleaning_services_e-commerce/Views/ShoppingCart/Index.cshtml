@@ -1,0 +1,103 @@
+﻿@model List<Sell__cleaning_services_e_commerce.Models.ViewModel.CartItemViewModel>
+@{
+    ViewData["Title"] = "Giỏ Hàng";
+    Layout = "~/Views/Shared/customer/_Layout.cshtml";
+}
+<div class="container mt-5 pt-5">
+    <h2 class="mb-4">Giỏ Hàng Của Bạn</h2>
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info" role="alert">
+            Giỏ hàng của bạn đang trống.
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <table class="table">
+                <thead class="table-info">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th>Sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Tổng</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr data-product-id="@item.ProductId">
+                            <th scope="row">@(Model.IndexOf(item) + 1)</th>
+                            <td>@item.ProductName</td>
+                            <td>
+                                <input id="form1" min="0" max="@item.MaxQuantity" name="quantity" value="@item.Quantity" type="number"
+                                       class="form-control form-control-sm quantity-input" data-price="@item.Price" />
+                                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
+                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                </button>
+                            </td>
+                            <td class="item-price">@item.Price VNĐ</td>
+                            <td class="item-total">@item.TotalPrice VNĐ</td>
+                            <td><button class="btn btn-danger btn-sm remove-item">Xóa</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="row mt-4">
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Tổng đơn hàng</h5>
+                        <div class="d-flex justify-content-between mt-3">
+                            <span>Tổng tiền hàng:</span>
+                            <strong id="cart-total">@Model.Sum(i => i.TotalPrice) VNĐ</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mt-2">
+                            <span>Phí vận chuyển:</span>
+                            <span>0 VNĐ</span>
+                        </div>
+                        <hr>
+
+                        <a asp-action="Checkout" asp-controller="ShoppingCart" class="btn btn-primary">Xác nhận đặt hàng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        // Xử lý khi checkbox "Sử dụng thông tin tài khoản" được click
+        $('#useUserInfo').change(function () {
+            if (this.checked) {
+                // Gọi API hoặc sử dụng dữ liệu có sẵn để điền thông tin user
+                // Ví dụ:
+                $.get('/api/user/info', function (data) {
+                    $('input[name="HoTen"]').val(data.fullName);
+                    $('input[name="DienThoai"]').val(data.phoneNumber);
+                    $('textarea[name="DiaChi"]').val(data.address);
+                });
+            } else {
+                // Xóa các trường thông tin
+                $('input[name="HoTen"]').val('');
+                $('input[name="DienThoai"]').val('');
+                $('textarea[name="DiaChi"]').val('');
+            }
+        });
+
+        // Xử lý form validation
+        $('.needs-validation').submit(function (event) {
+            if (!this.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            $(this).addClass('was-validated');
+        });
+    });
+</script>
