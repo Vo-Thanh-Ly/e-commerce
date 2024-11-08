@@ -39,7 +39,7 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
             _logger = logger;
             _sender = emailSender;
         }
-
+       public int countShopping = 0;
         // Hiển thị giỏ hàng
         public async Task<IActionResult> Index()
         {
@@ -55,10 +55,10 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
                     ProductId = sc.ProductId,
                     ProductName = sc.Product.ProductName,
                     Quantity = sc.Quantity,
-                    Price = sc.Product.Price,
-                    //      MaxQuantity = sc.Product.QuantityInStock
+                    Price = sc.Product.Price
                 })
                 .ToListAsync();
+
             }
             else
             { // Lấy giỏ hàng từ session
@@ -89,6 +89,27 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
             }
             return View(cartViewModel);
         }
+
+        public async Task<IActionResult> GetCartItemCount()
+        {
+            int itemCount = 0;
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                itemCount = await _context.ShoppingCarts
+                    .Where(sc => sc.UserId == user.Id)
+                    .SumAsync(sc => sc.Quantity);
+            }
+            else
+            {
+                var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart");
+                itemCount = cart?.Sum(item => item.Quantity) ?? 0;
+            }
+
+            return Json(new { count = itemCount });
+        }
+
 
 
         [HttpPost]

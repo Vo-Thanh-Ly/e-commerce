@@ -9,10 +9,10 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Sell__cleaning_services_e_commerce.Areas.MailService;
 using Sell__cleaning_services_e_commerce.Models;
 
 namespace Sell_​_cleaning_services_e_commerce.Areas.Identity.Pages.Account

@@ -11,7 +11,9 @@ namespace Sell_​_cleaning_services_e_commerce.Areas.MailService
 
             //var pw = "pw pw pw pw";
 
-       
+            var mailServer = "vothanhly632002@gmail.com";
+
+            var pw = "dvuy bkkm oxbl tnkg";
 
             var client = new SmtpClient("smtp.gmail.com", 587)
             {
