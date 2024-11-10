@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Sell ​_cleaning_services_e-commerce")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+29a58c769e6487b615c1790e9b4b34792b7718c8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+95bbd85f4ee2e9e018cf690b5feb2148767f7068")]
 [assembly: System.Reflection.AssemblyProductAttribute("Sell ​_cleaning_services_e-commerce")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Sell ​_cleaning_services_e-commerce")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

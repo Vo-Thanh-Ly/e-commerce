@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|d:\\hoctap\\thuongmaidientu\\e-commerce\\sell \u200B_cleaning_services_e-commerce\\sell \u200B_cleaning_services_e-commerce\\views\\shared\\customer\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|solutionrelative:sell \u200B_cleaning_services_e-commerce\\views\\shared\\customer\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|d:\\hoctap\\thuongmaidientu\\e-commerce\\sell \u200B_cleaning_services_e-commerce\\sell \u200B_cleaning_services_e-commerce\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|solutionrelative:sell \u200B_cleaning_services_e-commerce\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|d:\\hoctap\\thuongmaidientu\\e-commerce\\sell \u200B_cleaning_services_e-commerce\\sell \u200B_cleaning_services_e-commerce\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D6222B44-B65A-4040-9416-80021613EC1D}|Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce.csproj|solutionrelative:sell \u200B_cleaning_services_e-commerce\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,19 +35,45 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Views\\Shared\\customer\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Sell \u200B_cleaning_services_e-commerce\\Views\\Shared\\customer\\_Layout.cshtml",
+              "ToolTip": "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Views\\Shared\\customer\\_Layout.cshtml*",
+              "RelativeToolTip": "Sell \u200B_cleaning_services_e-commerce\\Views\\Shared\\customer\\_Layout.cshtml*",
+              "ViewState": "AgIAAJMAAAAAAAAAAAAawKsAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-04T19:19:26.782Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Sell \u200B_cleaning_services_e-commerce\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Views\\Home\\Index.cshtml*",
+              "RelativeToolTip": "Sell \u200B_cleaning_services_e-commerce\\Views\\Home\\Index.cshtml*",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAAAHgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-04T19:16:46.968Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Program.cs",
               "RelativeDocumentMoniker": "Sell \u200B_cleaning_services_e-commerce\\Program.cs",
               "ToolTip": "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Program.cs",
               "RelativeToolTip": "Sell \u200B_cleaning_services_e-commerce\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-04T19:01:44.79Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "ShoppingCartController.cs",
               "DocumentMoniker": "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Controllers\\ShoppingCartController.cs",
               "RelativeDocumentMoniker": "Sell \u200B_cleaning_services_e-commerce\\Controllers\\ShoppingCartController.cs",
@@ -47,12 +81,11 @@
               "RelativeToolTip": "Sell \u200B_cleaning_services_e-commerce\\Controllers\\ShoppingCartController.cs",
               "ViewState": "AgIAADAAAAAAAAAAAAAiwD4AAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-04T18:59:24.416Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-04T18:59:24.416Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell \u200B_cleaning_services_e-commerce\\Sell \u200B_cleaning_services_e-commerce\\appsettings.json",
               "RelativeDocumentMoniker": "Sell \u200B_cleaning_services_e-commerce\\appsettings.json",
@@ -60,8 +93,7 @@
               "RelativeToolTip": "Sell \u200B_cleaning_services_e-commerce\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-11-04T18:54:06.599Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-04T18:54:06.599Z"
             }
           ]
         },

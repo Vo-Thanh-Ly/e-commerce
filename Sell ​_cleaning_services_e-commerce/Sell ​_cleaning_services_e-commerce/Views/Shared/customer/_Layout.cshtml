@@ -112,6 +112,21 @@
                         <button class="btn btn-outline-primary rounded-circle p-2" data-bs-toggle="modal" data-bs-target="#searchModal">
                             <i class="fas fa-search"></i>
                         </button>
+<<<<<<< HEAD
+=======
+                        <a href="#" class="position-relative me-4 my-auto">
+                            <i class="fa fa-shopping-bag fa-2x"></i>
+                            <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
+                                  style="top: -5px; left: 15px; height: 20px; min-width: 20px;"></span>
+                        </a>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <div class="dropdown my-auto">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user fa-lg" style="color: white;"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
+>>>>>>> 86f029d5278df5aebd5fca5b1e1998f64fa7e71b
 
                         <!-- Cart -->
                         <a asp-controller="ShoppingCart" asp-action="Index" class="btn btn-outline-primary position-relative rounded-circle p-2">
@@ -146,12 +161,27 @@
                                         </form>
                                     </li>
                                 </ul>
+<<<<<<< HEAD
                             }
                             else
                             {
                                 <ul class="dropdown-menu dropdown-menu-end shadow border-0">
                                     <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Đăng ký</a></li>
                                     <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a></li>
+=======
+                            </div>
+                        }
+                        else
+                        {
+
+                            <div class="dropdown my-auto">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user fa-lg" style="color: white"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
+                                    <li><a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Đăng ký</a></li>
+                                    <li><a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a></li>
+>>>>>>> 86f029d5278df5aebd5fca5b1e1998f64fa7e71b
                                 </ul>
                             }
                         </div>
@@ -193,6 +223,7 @@
 
                         </a>
                     </div>
+<<<<<<< HEAD
 
                     <div class="col-lg-3">
                         <div class="d-flex justify-content-end pt-3">
@@ -210,6 +241,11 @@
                             </a>
                         </div>
                     </div>
+=======
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <a href="" class="btn btn-warning px-4 py-2 rounded-pill" >Mua Ngay</a>
+>>>>>>> 86f029d5278df5aebd5fca5b1e1998f64fa7e71b
                 </div>
             </div>
 
