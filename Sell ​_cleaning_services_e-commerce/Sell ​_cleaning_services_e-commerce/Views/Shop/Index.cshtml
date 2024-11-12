@@ -49,9 +49,9 @@
                                     }
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" asp-controller="Shop" asp-action="Index" asp-route-sortOrder="MoiNhat" asp-route-categoriesId="@ViewBag.CategoryId">Mới nhất</a>
-                                    <a class="dropdown-item" asp-controller="Shop" asp-action="Index" asp-route-sortOrder="TangDan" asp-route-categoriesId="@ViewBag.CategoryId">Tăng dần</a>
-                                    <a class="dropdown-item" asp-controller="Shop" asp-action="Index" asp-route-sortOrder="GiamDan" asp-route-categoriesId="@ViewBag.CategoryId">Giảm dần</a>
+                                    <a class="dropdown-item" asp-controller="Shop" asp-action="Index" asp-route-sortOrder="MoiNhat" asp-route-CategoryId="@ViewBag.CategoryId">Mới nhất</a>
+                                    <a class="dropdown-item" asp-controller="Shop" asp-action="Index" asp-route-sortOrder="TangDan" asp-route-CategoryId="@ViewBag.CategoryId">Tăng dần</a>
+                                    <a class="dropdown-item" asp-controller="Shop" asp-action="Index" asp-route-sortOrder="GiamDan" asp-route-CategoryId="@ViewBag.CategoryId">Giảm dần</a>
                                 </div>
 
                             </div>
@@ -100,7 +100,7 @@
                                             <h5 data-bs-toggle="tooltip" data-bs-placement="bottom" title="@product.fullname">@product.ProductName</h5>
                                             <p>@product.Description</p>
                                             <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-6 fw-bold mb-0 ">@product.Price</p>
+                                                <p class="text-dark fs-6 fw-bold mb-0 ">@product.Price.ToString("#,0") VNĐ</p>
                                                 @{
                                                     /*add to cart*/
                                                 }
@@ -115,7 +115,7 @@
                             <div class="col-12">
                                 <div class="pagination d-flex justify-content-center mt-5">
                                     <nav aria-label="Page navigation">
-                                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, categoriesId = ViewBag.CategoryId, SearchString = ViewBag.SearchString }),
+                                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, CategoryId = ViewBag.CategoryId, SearchString = ViewBag.SearchString }),
                                                  new PagedListRenderOptions
                                         {
                                             LiElementClasses = new string[] { "rounded" },

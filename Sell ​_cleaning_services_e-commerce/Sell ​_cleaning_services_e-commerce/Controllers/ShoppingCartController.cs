@@ -381,7 +381,7 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
                                 Address = model.DiaChi ?? khachHang.Address,
                                 PhoneNumber = model.DienThoai,
                                 InvoiceDate = DateTime.Now,
-                                StatusId = 1,
+                                StatusId = 2,
                                 Notes = model.GhiChu,
                                 TotalAmount = sum
                             };
@@ -423,7 +423,7 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
                                     ProductId = item.ProductId,
                                     Quantity = item.Quantity,
                                     UnitPrice = item.Product.Price,
-                                    Total = (decimal)(item.Quantity * item.Product.Price)
+                                    Total = (item.Quantity * item.Product.Price)
                                 };
                                 invoiceDetails.Add(detail);
                                 System.Diagnostics.Debug.WriteLine($"Adding invoice detail for product: {item.ProductId}");
@@ -557,7 +557,7 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
                         ProductId = item.ProductId,
                         Quantity = item.Quantity,
                         UnitPrice = item.Product.Price,
-                        Total = (decimal)(item.Quantity * item.Product.Price)
+                        Total = (item.Quantity * item.Product.Price)
                     };
                     invoiceDetails.Add(detail);
                 }
@@ -593,29 +593,51 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
         {
             var emailContent = new StringBuilder();
 
-            // Nội dung email
-            emailContent.AppendLine($"Kính chào {hoadon.FullName},");
-            emailContent.AppendLine("Cảm ơn bạn đã đặt hàng! Dưới đây là thông tin chi tiết về đơn hàng của bạn:");
-            emailContent.AppendLine("\nThông tin đơn hàng:");
-            emailContent.AppendLine($"Mã đơn hàng: {hoadon.InvoiceId}");
-            emailContent.AppendLine($"Ngày đặt hàng: {hoadon.InvoiceDate.ToString()}");
-            emailContent.AppendLine($"Địa chỉ giao hàng: {hoadon.Address}");
-            emailContent.AppendLine($"Số điện thoại: {hoadon.PhoneNumber}");
-            emailContent.AppendLine("Ghi chú: " + note);
-            emailContent.AppendLine("\nSản phẩm:");
+            // Nội dung email HTML
+            emailContent.AppendLine("<html>");
+            emailContent.AppendLine("<body>");
+            emailContent.AppendLine($"<h2>Kính chào {hoadon.FullName},</h2>");
+            emailContent.AppendLine("<p>Cảm ơn bạn đã đặt hàng! Dưới đây là thông tin chi tiết về đơn hàng của bạn:</p>");
+            emailContent.AppendLine("<h3>Thông tin đơn hàng:</h3>");
+            emailContent.AppendLine("<table style='width:100%; border-collapse: collapse;'>");
+            emailContent.AppendLine("<tr><td><strong>Mã đơn hàng:</strong></td><td>" + hoadon.InvoiceId + "</td></tr>");
+            emailContent.AppendLine("<tr><td><strong>Ngày đặt hàng:</strong></td><td>" + hoadon.InvoiceDate.ToString() + "</td></tr>");
+            emailContent.AppendLine("<tr><td><strong>Địa chỉ giao hàng:</strong></td><td>" + hoadon.Address + "</td></tr>");
+            emailContent.AppendLine("<tr><td><strong>Số điện thoại:</strong></td><td>" + hoadon.PhoneNumber + "</td></tr>");
+            emailContent.AppendLine("<tr><td><strong>Ghi chú:</strong></td><td>" + note + "</td></tr>");
+            emailContent.AppendLine("</table>");
 
             // Danh sách sản phẩm
+            emailContent.AppendLine("<h3>Sản phẩm:</h3>");
+            emailContent.AppendLine("<table style='width:100%; border-collapse: collapse; border: 1px solid #ddd;'>");
+            emailContent.AppendLine("<tr style='background-color: #f2f2f2;'>");
+            emailContent.AppendLine("<th style='padding: 8px; text-align: left;'>Tên sản phẩm</th>");
+            emailContent.AppendLine("<th style='padding: 8px; text-align: left;'>Số lượng</th>");
+            emailContent.AppendLine("<th style='padding: 8px; text-align: right;'>Giá mỗi sản phẩm</th>");
+            emailContent.AppendLine("</tr>");
+
             foreach (var item in invoiceDetails)
             {
-                emailContent.AppendLine($"- {item.Product.ProductName} (Số lượng: {item.Quantity}) - Giá mỗi sản phẩm: {item.UnitPrice} VNĐ");
-
+                emailContent.AppendLine("<tr>");
+                emailContent.AppendLine($"<td style='padding: 8px; border: 1px solid #ddd;'>{item.Product.ProductName}</td>");
+                emailContent.AppendLine($"<td style='padding: 8px; border: 1px solid #ddd;'>{item.Quantity}</td>");
+                emailContent.AppendLine($"<td style='padding: 8px; text-align: right; border: 1px solid #ddd;'>{item.UnitPrice.ToString("N0")} VNĐ</td>");
+                emailContent.AppendLine("</tr>");
             }
+            emailContent.AppendLine("</table>");
 
-            // Tổng tiền
-            emailContent.AppendLine($"\nTổng tiền: {hoadon.TotalAmount} VNĐ");
-            emailContent.AppendLine("\nTrạng thái thanh toán:" + status);
-            emailContent.AppendLine("\nXin cảm ơn bạn đã mua hàng tại cửa hàng của chúng tôi!");
-            emailContent.AppendLine("\nTất cả mọi thắt mắc hay vấn đề về đơn hàng của bạn bạn có thể liên hệ với chúng tôi qua qua email hoạc số điện thoại 123456789!");
+            // Tổng tiền và trạng thái thanh toán
+            emailContent.AppendLine("<h3>Tổng tiền:</h3>");
+            emailContent.AppendLine("<p><strong>" + hoadon.TotalAmount.ToString("N0") + " VNĐ</strong></p>");
+            emailContent.AppendLine("<h3>Trạng thái thanh toán:</h3>");
+            emailContent.AppendLine("<p><strong>" + status + "</strong></p>");
+
+            emailContent.AppendLine("<p>Xin cảm ơn bạn đã mua hàng tại cửa hàng của chúng tôi!</p>");
+            emailContent.AppendLine("<p>Nếu có bất kỳ thắc mắc nào về đơn hàng của bạn, vui lòng liên hệ với chúng tôi qua email hoặc số điện thoại 123456789.</p>");
+
+            emailContent.AppendLine("</body>");
+            emailContent.AppendLine("</html>");
+
             // Gửi email
             await _sender.SendEmailAsync(
                 user.Email,

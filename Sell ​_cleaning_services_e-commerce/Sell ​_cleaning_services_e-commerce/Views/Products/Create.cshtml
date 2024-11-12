@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/admin/_Layout.cshtml";
 }
 
+
+
 <div class="container-fluid py-4">
     <h1 class="mb-4">Thêm sản phẩm</h1>
 
@@ -28,13 +30,13 @@
                             </div>
                             <div class="col-12">
                                 <label asp-for="Product.Description" class="form-label"></label>
-                                <textarea asp-for="Product.Description" class="form-control" rows="3"></textarea>
+                                <textarea id="Product_Description" asp-for="Product.Description" class="form-control" rows="3"></textarea>
                                 <span asp-validation-for="Product.Description" class="text-danger"></span>
                             </div>
                             <div class="col-md-6">
                                 <label asp-for="Product.Price" class="form-label"></label>
                                 <div class="input-group">
-                                    <span class="input-group-text">$</span>
+                                    <span class="input-group-text">VNĐ</span>
                                     <input asp-for="Product.Price" class="form-control" />
                                 </div>
                                 <span asp-validation-for="Product.Price" class="text-danger"></span>
@@ -85,7 +87,7 @@
             <div class="col-md-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title mb-3">Đặc điên công nghệ</h5>
+                        <h5 class="card-title mb-3">Đặc điểm công nghệ</h5>
                         <div class="mb-3">
                             <label asp-for="Product.Power" class="form-label"></label>
                             <input asp-for="Product.Power" class="form-control" />
@@ -111,10 +113,7 @@
                             <input asp-for="Product.WarrantyPeriod" class="form-control" />
                             <span asp-validation-for="Product.WarrantyPeriod" class="text-danger"></span>
                         </div>
-                        <div class="form-check mb-3">
-                            <input asp-for="Product.IsDiscontinued" class="form-check-input" type="checkbox" />
-                            <label asp-for="Product.IsDiscontinued" class="form-check-label"></label>
-                        </div>
+                       
 
                         <input type="hidden" asp-for="Product.CreatedDate" />
                         <input type="hidden" asp-for="Product.LastUpdatedDate" />
@@ -145,9 +144,16 @@
         </div>
     </form>
 </div>
+<script>
+    tinymce.init({
+        selector: '#Product_Description'
+    });
+</script>
+
 
 <script>
-                document.getElementById("CreatedDate").value = new Date().toISOString();
+    document.getElementById("CreatedDate").value = new Date().toISOString();
     document.getElementById("LastUpdatedDate").value = new Date().toISOString();
-                document.getElementById("product").classList.add("active");
+    document.getElementById("product").classList.add("active");
+
 </script>

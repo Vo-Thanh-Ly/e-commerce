@@ -35,6 +35,7 @@ namespace Sell_​_cleaning_services_e_commerce.Data
 
         public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
+        public DbSet<EmailLog> EmailLogs { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

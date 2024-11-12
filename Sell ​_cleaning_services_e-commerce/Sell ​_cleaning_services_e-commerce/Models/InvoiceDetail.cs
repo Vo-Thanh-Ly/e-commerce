@@ -18,8 +18,8 @@ namespace Sell_​_cleaning_services_e_commerce.Models
 
         public double UnitPrice { get; set; }
 
-        [Column(TypeName = "decimal(18, 2)")]
-        public decimal Total { get; set; }
+        
+        public double Total { get; set; }
 
         [ForeignKey("InvoiceId")]
         [InverseProperty("InvoiceDetails")]

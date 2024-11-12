@@ -119,25 +119,34 @@ namespace Sell_​_cleaning_services_e_commerce.Areas.Identity.Pages.Account.Man
             }
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var nomalName = user.Nomalname;
+            var address = user.Address;
             if (Input.PhoneNumber != phoneNumber)
             {
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
 
-
-                // Cập nhật tên người dùng và địa chỉ
-                user.Nomalname = Input.NomalName;
-                user.Address = Input.Address;
-
-                // Lưu các thay đổi
-                var updateResult = await _userManager.UpdateAsync(user);
-              
                 if (!setPhoneResult.Succeeded)
                 {
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();
                 }
             }
+            if (Input.NomalName != nomalName)
+            {
+                user.Nomalname = Input.NomalName; // Gán giá trị mới từ Input vào user.Nomalname
+            }
+            if (Input.Address != address)
+            {
+                user.Address = Input.Address; // Gán giá trị mới từ Input vào user.Address
+            }
 
+            // Lưu các thay đổi
+            var updateResult = await _userManager.UpdateAsync(user);
+            if (!updateResult.Succeeded)
+            {
+                StatusMessage = "Unexpected error when trying to update profile.";
+                return RedirectToPage();
+            }
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

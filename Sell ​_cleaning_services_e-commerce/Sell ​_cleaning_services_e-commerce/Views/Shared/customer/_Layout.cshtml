@@ -95,6 +95,20 @@
                                 <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
 
                                     <li><a class="dropdown-item active" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Settings</a></li>
+                                    @if (User.IsInRole(Sell__cleaning_services_e_commerce.Areas.Other.RoleList.Admin))
+                                    {
+                                        <li><a class="dropdown-item active" asp-controller="AdminHome" asp-action="UserList">Trang quản trị</a></li>
+                                    }
+                                    @if (User.IsInRole(Sell__cleaning_services_e_commerce.Areas.Other.RoleList.Shipper))
+                                    {
+                                        <li><a class="dropdown-item active" asp-controller="Shipper" asp-action="Shipper_Index">Giao hàng</a></li>
+                                          
+                                    }
+                                    @if (User.IsInRole(Sell__cleaning_services_e_commerce.Areas.Other.RoleList.Salesperson))
+                                    {
+                                        <li><a class="dropdown-item active" asp-controller="Salesperson" asp-action="Index">Salesperson</a></li>
+
+                                    }
                                     <li>
                                         <form class="form-inline dropdown-item" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                                             <button type="submit" class="nav-link btn ">Đăng xuất</button>

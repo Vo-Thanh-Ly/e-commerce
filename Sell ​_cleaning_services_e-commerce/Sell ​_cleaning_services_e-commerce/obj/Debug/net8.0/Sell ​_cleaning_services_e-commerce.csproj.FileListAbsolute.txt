@@ -1906,3 +1906,8 @@ C:\Users\votha\Source\Repos\Vo-Thanh-Ly\e-commerce\Sell ​_cleaning_services_e-
 C:\Users\votha\Source\Repos\Vo-Thanh-Ly\e-commerce\Sell ​_cleaning_services_e-commerce\Sell ​_cleaning_services_e-commerce\obj\Debug\net8.0\Sell ​_cleaning_services_e-commerce.pdb
 C:\Users\votha\Source\Repos\Vo-Thanh-Ly\e-commerce\Sell ​_cleaning_services_e-commerce\Sell ​_cleaning_services_e-commerce\obj\Debug\net8.0\Sell ​_cleaning_services_e-commerce.genruntimeconfig.cache
 C:\Users\votha\Source\Repos\Vo-Thanh-Ly\e-commerce\Sell ​_cleaning_services_e-commerce\Sell ​_cleaning_services_e-commerce\obj\Debug\net8.0\ref\Sell ​_cleaning_services_e-commerce.dll
+C:\Users\votha\Source\Repos\Vo-Thanh-Ly\e-commerce\Sell ​_cleaning_services_e-commerce\Sell ​_cleaning_services_e-commerce\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\votha\Source\Repos\Vo-Thanh-Ly\e-commerce\Sell ​_cleaning_services_e-commerce\Sell ​_cleaning_services_e-commerce\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\votha\Source\Repos\Vo-Thanh-Ly\e-commerce\Sell ​_cleaning_services_e-commerce\Sell ​_cleaning_services_e-commerce\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\votha\Source\Repos\Vo-Thanh-Ly\e-commerce\Sell ​_cleaning_services_e-commerce\Sell ​_cleaning_services_e-commerce\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\Users\votha\Source\Repos\Vo-Thanh-Ly\e-commerce\Sell ​_cleaning_services_e-commerce\Sell ​_cleaning_services_e-commerce\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll

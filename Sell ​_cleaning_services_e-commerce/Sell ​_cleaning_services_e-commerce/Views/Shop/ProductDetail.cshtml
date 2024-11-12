@@ -58,8 +58,8 @@
 <div class="container py-5">
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">@Model.Category.CategoryName</a></li>
+            <li class="breadcrumb-item"><a href="#" class="text-black">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="#" class="text-black">@Model.Category.CategoryName</a></li>
             <li class="breadcrumb-item active" aria-current="page">@Model.ProductName</li>
         </ol>
     </nav>
@@ -118,16 +118,17 @@
                     <span class="text-muted">(@(ViewBag.Comments?.Count ?? 0) đánh giá)</span>
                 </div>
 
-                <h2 class="display-6 fw-bold text-primary mb-4">@Model.Price VNĐ</h2>
+                <h2 class="display-6 fw-bold  mb-4">@Model.Price.ToString("#,0") VNĐ</h2>
 
                 <div class="mb-4">
                     @if (Model.IsDiscontinued)
                     {
-                        <span class="badge bg-danger p-2 rounded-pill">Ngừng bán</span>
+
+                        <span class="badge bg-success p-2 rounded-pill">Còn bán</span>
                     }
                     else
                     {
-                        <span class="badge bg-success p-2 rounded-pill">Còn bán</span>
+                        <span class="badge bg-danger p-2 rounded-pill">Ngừng bán</span>
                     }
                 </div>
 

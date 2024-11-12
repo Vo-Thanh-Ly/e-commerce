@@ -15,7 +15,7 @@ using X.PagedList;
 
 namespace Sell_​_cleaning_services_e_commerce.Controllers
 {
-  //  [Authorize(Roles = RoleList.Admin)]
+    [Authorize(Roles = RoleList.Admin)]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -30,14 +30,31 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index(int? page)
+        public async Task<IActionResult> Index(int? page, string searchInput)
         {
-
-            int pageSize = 10; // Số lượng item trên mỗi trang
+            int pageSize = 40; // Số lượng item trên mỗi trang
             int pageNumber = page ?? 1; // Trang hiện tại, mặc định là trang 1
-            var items = _context.Products.Include(p => p.Category).ToPagedList(pageNumber, pageSize);
-            return View(items);
+
+            
+            if (!string.IsNullOrEmpty(searchInput))
+            {
+               var products = _context.Products.Include(p => p.Category).Where(p => p.ProductName.ToLower().Contains(searchInput.ToLower()));
+                var items = products.ToPagedList(pageNumber, pageSize);
+                ViewData["searchInput"] = searchInput; // Để hiển thị lại chuỗi tìm kiếm
+                return View(items);
+            }
+           
+           else 
+            {
+                var products = _context.Products.Include(p => p.Category).ToList();
+                var items = products.ToPagedList(pageNumber, pageSize);
+                ViewData["searchInput"] = searchInput; // Để hiển thị lại chuỗi tìm kiếm
+                return View(items);
+            }
+
+          
         }
+
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -81,10 +98,11 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductViewModel productViewModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
+                    productViewModel.Product.IsDiscontinued = true;
                     _context.Add(productViewModel.Product);
                     await _context.SaveChangesAsync();
 

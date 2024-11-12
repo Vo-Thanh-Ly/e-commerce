@@ -186,6 +186,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5Ib21lXFVzZXJMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/votha/Source/Repos/Vo-Thanh-Ly/e-commerce/Sell ​_cleaning_services_e-commerce/Sell ​_cleaning_services_e-commerce/Views/EmailLogs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1haWxMb2dzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/votha/Source/Repos/Vo-Thanh-Ly/e-commerce/Sell ​_cleaning_services_e-commerce/Sell ​_cleaning_services_e-commerce/Views/EmailLogs/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1haWxMb2dzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/votha/Source/Repos/Vo-Thanh-Ly/e-commerce/Sell ​_cleaning_services_e-commerce/Sell ​_cleaning_services_e-commerce/Views/EmailLogs/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1haWxMb2dzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/votha/Source/Repos/Vo-Thanh-Ly/e-commerce/Sell ​_cleaning_services_e-commerce/Sell ​_cleaning_services_e-commerce/Views/EmailLogs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1haWxMb2dzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/votha/Source/Repos/Vo-Thanh-Ly/e-commerce/Sell ​_cleaning_services_e-commerce/Sell ​_cleaning_services_e-commerce/Views/EmailLogs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1haWxMb2dzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/votha/Source/Repos/Vo-Thanh-Ly/e-commerce/Sell ​_cleaning_services_e-commerce/Sell ​_cleaning_services_e-commerce/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -214,6 +234,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/votha/Source/Repos/Vo-Thanh-Ly/e-commerce/Sell ​_cleaning_services_e-commerce/Sell ​_cleaning_services_e-commerce/Views/Salesperson/CreateEmailToAll.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsZXNwZXJzb25cQ3JlYXRlRW1haWxUb0FsbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/votha/Source/Repos/Vo-Thanh-Ly/e-commerce/Sell ​_cleaning_services_e-commerce/Sell ​_cleaning_services_e-commerce/Views/Salesperson/CreateEmailToOne.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsZXNwZXJzb25cQ3JlYXRlRW1haWxUb09uZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/votha/Source/Repos/Vo-Thanh-Ly/e-commerce/Sell ​_cleaning_services_e-commerce/Sell ​_cleaning_services_e-commerce/Views/Salesperson/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsZXNwZXJzb25cRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/votha/Source/Repos/Vo-Thanh-Ly/e-commerce/Sell ​_cleaning_services_e-commerce/Sell ​_cleaning_services_e-commerce/Views/Salesperson/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsZXNwZXJzb25cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/votha/Source/Repos/Vo-Thanh-Ly/e-commerce/Sell ​_cleaning_services_e-commerce/Sell ​_cleaning_services_e-commerce/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -224,6 +260,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/votha/Source/Repos/Vo-Thanh-Ly/e-commerce/Sell ​_cleaning_services_e-commerce/Sell ​_cleaning_services_e-commerce/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/votha/Source/Repos/Vo-Thanh-Ly/e-commerce/Sell ​_cleaning_services_e-commerce/Sell ​_cleaning_services_e-commerce/Views/Shipper/OrderDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hpcHBlclxPcmRlckRldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/votha/Source/Repos/Vo-Thanh-Ly/e-commerce/Sell ​_cleaning_services_e-commerce/Sell ​_cleaning_services_e-commerce/Views/Shipper/Shipper_Index.cshtml]

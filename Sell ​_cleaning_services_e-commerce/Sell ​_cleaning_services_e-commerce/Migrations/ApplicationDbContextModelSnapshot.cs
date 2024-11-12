@@ -18,7 +18,7 @@ namespace Sell__cleaning_services_e_commerce.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .UseCollation("Vietnamese_CI_AS")
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -190,6 +190,42 @@ namespace Sell__cleaning_services_e_commerce.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("Sell__cleaning_services_e_commerce.Models.EmailLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("SentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ToEmail")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("EmailLogs");
+                });
+
             modelBuilder.Entity("Sell__cleaning_services_e_commerce.Models.Invoice", b =>
                 {
                     b.Property<int>("InvoiceId")
@@ -259,8 +295,8 @@ namespace Sell__cleaning_services_e_commerce.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18, 2)");
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
 
                     b.Property<double>("UnitPrice")
                         .HasColumnType("float");
@@ -749,6 +785,17 @@ namespace Sell__cleaning_services_e_commerce.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Sell__cleaning_services_e_commerce.Models.EmailLog", b =>
+                {
+                    b.HasOne("Sell__cleaning_services_e_commerce.Models.User", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("Sell__cleaning_services_e_commerce.Models.Invoice", b =>

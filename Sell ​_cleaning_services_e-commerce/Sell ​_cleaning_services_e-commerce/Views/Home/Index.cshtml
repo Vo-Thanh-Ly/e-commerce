@@ -133,7 +133,7 @@
                                                     <h5 data-bs-toggle="tooltip" data-bs-placement="bottom" title="@product.fullname">@product.ProductName</h5>
                                                     <p>@product.Description</p>
                                                     <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-6 fw-bold mb-0 ">@product.Price</p>
+                                                        <p class="text-dark fs-6 fw-bold mb-0 ">@product.Price.ToString("#,0") VNĐ</p>
                                                     @{
                                                         /*add to cart*/
                                                     }
@@ -177,7 +177,7 @@
                                                                 <h5 data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item01.fullname">@item01.ProductName</h5>
                                                                 <p>@item01.Description</p>
                                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                                    <p class="text-dark fs-6 fw-bold mb-0 ">@item01.Price</p>
+                                                                    <p class="text-dark fs-6 fw-bold mb-0 ">@item01.Price.ToString("#,0") VNĐ</p>
                                                             @{
                                                                 /*add to cart*/
                                                             }
