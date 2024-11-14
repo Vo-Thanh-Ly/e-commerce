@@ -33104,22 +33104,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\image\products\75da0ee0-02a7-4042-bf52-4d21329e9817.png))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\image\products\76bfd6f5-19c3-42c9-bbcd-2eefe952f985.png))">
-      <SourceType>Package</SourceType>
-      <SourceId>Sell ​_cleaning_services_e-commerce</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Sell ​_cleaning_services_e-commerce</BasePath>
-      <RelativePath>image/products/76bfd6f5-19c3-42c9-bbcd-2eefe952f985.png</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\image\products\76bfd6f5-19c3-42c9-bbcd-2eefe952f985.png))</OriginalItemSpec>
-    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\image\products\7a424609-f6f6-4386-827b-2423ce6e6ae5.png))">
       <SourceType>Package</SourceType>
       <SourceId>Sell ​_cleaning_services_e-commerce</SourceId>
@@ -33616,22 +33600,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\image\products\a11a481d-e858-4bb2-a5fb-3d94579f0102.png))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\image\products\a38f003e-0a28-43a5-a9e9-e94e0901f0df.png))">
-      <SourceType>Package</SourceType>
-      <SourceId>Sell ​_cleaning_services_e-commerce</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Sell ​_cleaning_services_e-commerce</BasePath>
-      <RelativePath>image/products/a38f003e-0a28-43a5-a9e9-e94e0901f0df.png</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\image\products\a38f003e-0a28-43a5-a9e9-e94e0901f0df.png))</OriginalItemSpec>
-    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\image\products\a5436c4d-e0ec-4f04-a9b9-57eede4efc38.png))">
       <SourceType>Package</SourceType>
       <SourceId>Sell ​_cleaning_services_e-commerce</SourceId>
@@ -33983,38 +33951,6 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\image\products\c69233b6-9754-4016-bbc5-a4d7a1d34a51.png))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\image\products\c75601de-531a-44a7-92cc-a104b57c13dc.png))">
-      <SourceType>Package</SourceType>
-      <SourceId>Sell ​_cleaning_services_e-commerce</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Sell ​_cleaning_services_e-commerce</BasePath>
-      <RelativePath>image/products/c75601de-531a-44a7-92cc-a104b57c13dc.png</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\image\products\c75601de-531a-44a7-92cc-a104b57c13dc.png))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\image\products\c9b5ec51-86bb-4a2d-8d28-87f3cc99a2b4.png))">
-      <SourceType>Package</SourceType>
-      <SourceId>Sell ​_cleaning_services_e-commerce</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Sell ​_cleaning_services_e-commerce</BasePath>
-      <RelativePath>image/products/c9b5ec51-86bb-4a2d-8d28-87f3cc99a2b4.png</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\image\products\c9b5ec51-86bb-4a2d-8d28-87f3cc99a2b4.png))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\image\products\cb2003de-45ce-4e50-bccb-a86dec8bf6ae.png))">
       <SourceType>Package</SourceType>
