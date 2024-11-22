@@ -8,7 +8,7 @@ using Sell__cleaning_services_e_commerce.Data;
 
 #nullable disable
 
-namespace Sell_​_cleaning_services_e_commerce.Migrations
+namespace Sell__cleaning_services_e_commerce.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -17,7 +17,8 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .UseCollation("Vietnamese_CI_AS")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -189,6 +190,42 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("Sell__cleaning_services_e_commerce.Models.EmailLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("SentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ToEmail")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("EmailLogs");
+                });
+
             modelBuilder.Entity("Sell__cleaning_services_e_commerce.Models.Invoice", b =>
                 {
                     b.Property<int>("InvoiceId")
@@ -197,10 +234,16 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceId"));
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CustomerId")
                         .IsRequired()
                         .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("InvoiceDate")
                         .ValueGeneratedOnAdd()
@@ -212,21 +255,20 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int?>("PaymentId")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(18, 2)");
+                    b.Property<double>("TotalAmount")
+                        .HasColumnType("float");
 
                     b.HasKey("InvoiceId")
                         .HasName("PK__Invoices__D796AAB5A27AD698");
 
                     b.HasIndex("CustomerId");
-
-                    b.HasIndex("PaymentId");
 
                     b.HasIndex("StatusId");
 
@@ -244,17 +286,20 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                     b.Property<int>("InvoiceId")
                         .HasColumnType("int");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18, 2)");
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
 
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18, 2)");
+                    b.Property<double>("UnitPrice")
+                        .HasColumnType("float");
 
                     b.HasKey("InvoiceDetailId")
                         .HasName("PK__InvoiceD__1F157811D0C87BC2");
@@ -298,18 +343,32 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"));
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
                     b.Property<string>("BankCode")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<bool>("Canceled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("DeliveredSussced")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("DeliveryFailed")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("InvoiceId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Note")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
-
-                    b.Property<decimal>("PaymentAmount")
-                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<DateTime?>("PaymentDate")
                         .ValueGeneratedOnAdd()
@@ -319,10 +378,9 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                     b.Property<int>("PaymentMethodId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PaymentStatus")
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ResponseCode")
                         .IsRequired()
@@ -336,6 +394,9 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
 
                     b.HasKey("PaymentId")
                         .HasName("PK__Payments__9B556A38F2A55A04");
+
+                    b.HasIndex("InvoiceId")
+                        .IsUnique();
 
                     b.HasIndex("PaymentMethodId");
 
@@ -461,7 +522,7 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(18, 0)");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
@@ -584,6 +645,9 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Avatar")
                         .HasColumnType("nvarchar(max)");
 
@@ -606,6 +670,9 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Nomalname")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -720,6 +787,17 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Sell__cleaning_services_e_commerce.Models.EmailLog", b =>
+                {
+                    b.HasOne("Sell__cleaning_services_e_commerce.Models.User", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sender");
+                });
+
             modelBuilder.Entity("Sell__cleaning_services_e_commerce.Models.Invoice", b =>
                 {
                     b.HasOne("Sell__cleaning_services_e_commerce.Models.User", "User")
@@ -728,18 +806,11 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Sell__cleaning_services_e_commerce.Models.Payment", "Payment")
-                        .WithMany("Invoices")
-                        .HasForeignKey("PaymentId")
-                        .HasConstraintName("FK__Invoices__Paymen__5CD6CB2B");
-
                     b.HasOne("Sell__cleaning_services_e_commerce.Models.InvoiceStatus", "Status")
                         .WithMany("Invoices")
                         .HasForeignKey("StatusId")
                         .IsRequired()
                         .HasConstraintName("FK__Invoices__Status__49C3F6B7");
-
-                    b.Navigation("Payment");
 
                     b.Navigation("Status");
 
@@ -767,11 +838,19 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
 
             modelBuilder.Entity("Sell__cleaning_services_e_commerce.Models.Payment", b =>
                 {
+                    b.HasOne("Sell__cleaning_services_e_commerce.Models.Invoice", "Invoice")
+                        .WithOne("Payment")
+                        .HasForeignKey("Sell__cleaning_services_e_commerce.Models.Payment", "InvoiceId")
+                        .IsRequired()
+                        .HasConstraintName("FK__Invoices__Payment__5CD6CB2B");
+
                     b.HasOne("Sell__cleaning_services_e_commerce.Models.PaymentMethod", "PaymentMethod")
                         .WithMany("Payments")
                         .HasForeignKey("PaymentMethodId")
                         .IsRequired()
-                        .HasConstraintName("FK__Payments__Paymen__5812160E");
+                        .HasConstraintName("FK__Payments__PaymentMethod__5812160E");
+
+                    b.Navigation("Invoice");
 
                     b.Navigation("PaymentMethod");
                 });
@@ -836,6 +915,9 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
             modelBuilder.Entity("Sell__cleaning_services_e_commerce.Models.Invoice", b =>
                 {
                     b.Navigation("InvoiceDetails");
+
+                    b.Navigation("Payment")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Sell__cleaning_services_e_commerce.Models.InvoiceStatus", b =>
@@ -845,8 +927,6 @@ namespace Sell_​_cleaning_services_e_commerce.Migrations
 
             modelBuilder.Entity("Sell__cleaning_services_e_commerce.Models.Payment", b =>
                 {
-                    b.Navigation("Invoices");
-
                     b.Navigation("PaymentLogs");
                 });
 

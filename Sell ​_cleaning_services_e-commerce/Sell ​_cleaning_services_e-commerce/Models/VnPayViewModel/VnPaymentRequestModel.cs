@@ -12,6 +12,6 @@
         public string Notes { get; set; }  // Ghi chú
         public string FullNameInInvoice { get; set; }  // Tên đầy đủ
         public string AddressInInvoice { get; set; }  // Địa chỉ
-        public int PhoneNumberInInvoice { get; set; }  // Số điện thoại
+        public string PhoneNumberInInvoice { get; set; }  // Số điện thoại
     }
 }

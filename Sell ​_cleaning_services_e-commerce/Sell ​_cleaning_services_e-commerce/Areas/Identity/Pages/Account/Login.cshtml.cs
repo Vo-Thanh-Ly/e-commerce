@@ -10,11 +10,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
+using Sell__cleaning_services_e_commerce.Areas.MailService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Sell__cleaning_services_e_commerce.Models;
+using Microsoft.EntityFrameworkCore;
+using Sell__cleaning_services_e_commerce.Models.ViewModel;
+using Sell__cleaning_services_e_commerce.Data;
 
 namespace Sell_​_cleaning_services_e_commerce.Areas.Identity.Pages.Account
 {
@@ -22,11 +25,15 @@ namespace Sell_​_cleaning_services_e_commerce.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly UserManager<User> _userManager;
+        private readonly ApplicationDbContext _context;
 
-        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger, UserManager<User> userManager, ApplicationDbContext context)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _userManager = userManager;
+            _context = context;
         }
 
         /// <summary>
@@ -116,6 +123,8 @@ namespace Sell_​_cleaning_services_e_commerce.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    var user = await _userManager.GetUserAsync(User);
+                    await SyncCartSessionToDatabase(user);
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -137,5 +146,43 @@ namespace Sell_​_cleaning_services_e_commerce.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+
+        private async Task SyncCartSessionToDatabase(User user)
+        {
+            // Lấy giỏ hàng từ session
+            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart");
+            if (cart != null)
+            {
+                foreach (var item in cart)
+                {
+                    // Kiểm tra xem sản phẩm đã có trong giỏ hàng của người dùng trong DB chưa
+                    var existingItem = await _context.ShoppingCarts
+                        .FirstOrDefaultAsync(sc => sc.UserId == user.Id && sc.ProductId == item.ProductId);
+
+                    if (existingItem != null)
+                    {
+                        // Nếu có rồi thì cộng số lượng từ session vào DB
+                        existingItem.Quantity += item.Quantity;
+                    }
+                    else
+                    {
+                        // Nếu chưa có thì thêm sản phẩm vào giỏ hàng trong DB
+                        _context.ShoppingCarts.Add(new ShoppingCart
+                        {
+                            UserId = user.Id,
+                            ProductId = item.ProductId,
+                            Quantity = item.Quantity
+                        });
+                    }
+                }
+                await _context.SaveChangesAsync();
+
+                // Xóa giỏ hàng khỏi session sau khi đồng bộ xong
+                HttpContext.Session.Remove("Cart");
+            }
+        }
+
+
+
     }
 }

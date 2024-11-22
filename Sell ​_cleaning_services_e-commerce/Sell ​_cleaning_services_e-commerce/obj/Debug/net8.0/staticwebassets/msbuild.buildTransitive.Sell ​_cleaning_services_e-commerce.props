@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Sell ​_cleaning_services_e-commerce.props" />
+</Project>

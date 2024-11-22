@@ -29,7 +29,7 @@
                                 <tr>
                                     <td>@item.ProductName</td>
                                     <td>@item.Quantity</td>
-                                    <td>@item.Price.ToString("N0") đ</td>
+                                    <td>@item.Price.ToString("#,0") VNĐ</td>
                                     <td>@item.TotalPrice.ToString("N0") đ</td>
                                 </tr>
                             }
@@ -46,13 +46,28 @@
         </div>
 
         <!-- Form thông tin thanh toán -->
+        
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
                     <h5 class="mb-0">Thông tin thanh toán</h5>
                 </div>
                 <div class="card-body">
-                    <form asp-action="Checkout" method="post">
+                    @if (@ViewBag.HtmlContent != null)
+                    {
+                        @Html.Raw(ViewBag.HtmlContent)
+                    }
+                    <form asp-action="Checkout" method="post" onsubmit="return checkForm()">
+                        @if (@ViewBag.usePersonalInfor==true)
+                        {
+                            <div class="form-group mb-3">
+                                <div class="form-check">
+                                    @Html.CheckBox("UseDefaultUserInfo", false, new { @class = "form-check-input", id = "useUserInfo" })
+                                    <label class="form-check-label" for="useUserInfo">Sử dụng thông tin tài khoản của tôi</label>
+                                </div>
+                            </div>
+                        }
+
                         <div class="form-group mb-3">
                             <label class="form-label">Họ tên:</label>
                             <input name="HoTen" class="form-control" required />
@@ -70,10 +85,8 @@
 
                         <div class="form-group mb-3">
                             <label class="form-label">Ghi chú:</label>
-                            <textarea name="GhiChu" class="form-control" rows="3"></textarea>
+                            <textarea name="GhiChu" id="GhiChu" class="form-control" rows="3"></textarea>
                         </div>
-
-                      
 
                         <div class="form-group mb-3">
                             <label class="form-label">Phương thức thanh toán:</label>
@@ -82,7 +95,7 @@
 
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Đặt hàng</button>
-                            <a href="/" class="btn btn-outline-secondary">Tiếp tục mua sắm</a>
+                            <a  class="btn btn-outline-secondary">Tiếp tục mua sắm</a>
                         </div>
                     </form>
                 </div>
@@ -93,9 +106,11 @@
 
 @section Scripts {
     <script>
-        document.getElementById('useUserInfo').addEventListener('change', function() {
+       
+
+        document.getElementById('useUserInfo').addEventListener('change', function () {
             if (this.checked) {
-                // Gửi request AJAX để lấy thông tin user hiện tại
+                // Send AJAX request to get current user info
                 fetch('/Account/GetCurrentUserInfo')
                     .then(response => response.json())
                     .then(data => {
@@ -105,5 +120,15 @@
                     });
             }
         });
+
+        function checkForm() {
+           
+            const textarea = document.getElementById("GhiChu");
+            if (textarea.value.trim() === "") {
+                textarea.value = "Không có";
+            }
+
+            return true; // Cho phép form được gửi đi
+        }
     </script>
 }

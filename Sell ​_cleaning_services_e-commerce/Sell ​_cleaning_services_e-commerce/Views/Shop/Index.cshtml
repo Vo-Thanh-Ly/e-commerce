@@ -49,9 +49,9 @@
                                     }
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" asp-controller="Shop" asp-action="Index" asp-route-sortOrder="MoiNhat" asp-route-categoriesId="@ViewBag.CategoryId">Mới nhất</a>
-                                    <a class="dropdown-item" asp-controller="Shop" asp-action="Index" asp-route-sortOrder="TangDan" asp-route-categoriesId="@ViewBag.CategoryId">Tăng dần</a>
-                                    <a class="dropdown-item" asp-controller="Shop" asp-action="Index" asp-route-sortOrder="GiamDan" asp-route-categoriesId="@ViewBag.CategoryId">Giảm dần</a>
+                                    <a class="dropdown-item" asp-controller="Shop" asp-action="Index" asp-route-sortOrder="MoiNhat" asp-route-CategoryId="@ViewBag.CategoryId">Mới nhất</a>
+                                    <a class="dropdown-item" asp-controller="Shop" asp-action="Index" asp-route-sortOrder="TangDan" asp-route-CategoryId="@ViewBag.CategoryId">Tăng dần</a>
+                                    <a class="dropdown-item" asp-controller="Shop" asp-action="Index" asp-route-sortOrder="GiamDan" asp-route-CategoryId="@ViewBag.CategoryId">Giảm dần</a>
                                 </div>
 
                             </div>
@@ -69,19 +69,15 @@
                                         {
                                             if (item.CategoryId == ViewBag.CategoryId && ViewBag.CategoryId != null)
                                             {
-                                                <li class="border border-info">
-                                                    <div class="d-flex justify-content-between fruite-name text-warning">
-                                                        <a asp-controller="Shop" asp-action="Index" asp-route-categoriesId="@item.CategoryId" asp-route-sortOrder="@ViewBag.CurrentSort">@item.CategoryName</a>
-                                                    </div>
-                                                </li>
+                                                <a href="@Url.Action("Index", new { CategoryId = item.CategoryId })" class="list-group-item list-group-item-action active">
+                                                    @item.CategoryName
+                                                </a>
                                             }
                                             else if (item.CategoryId != ViewBag.CategoryId)
                                             {
-                                                <li>
-                                                    <div class="d-flex justify-content-between fruite-name text-warning">
-                                                        <a asp-controller="Shop" asp-action="Index" asp-route-categoriesId="@item.CategoryId" asp-route-sortOrder="@ViewBag.CurrentSort">@item.CategoryName</a>
-                                                    </div>
-                                                </li>
+                                                <a href="@Url.Action("Index", new { CategoryId = item.CategoryId })" class="list-group-item list-group-item-action">
+                                                    @item.CategoryName
+                                                </a>
                                             }
                                         }
                                     </ul>
@@ -104,12 +100,12 @@
                                             <h5 data-bs-toggle="tooltip" data-bs-placement="bottom" title="@product.fullname">@product.ProductName</h5>
                                             <p>@product.Description</p>
                                             <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-6 fw-bold mb-0 ">@product.Price</p>
+                                                <p class="text-dark fs-6 fw-bold mb-0 ">@product.Price.ToString("#,0") VNĐ</p>
                                                 @{
                                                     /*add to cart*/
                                                 }
                                                 <input type="hidden" class="quantity" value="1" />
-                                                <button class="add-to-cart btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i>Add to cart</button>
+                                                <button class="add-to-cart btn btn-outline-warning rounded-pill px-3"><i class="fa fa-shopping-bag me-2 text-primary"></i>Add to cart</button>
                                             </div>
                                         </div>
 
@@ -119,7 +115,7 @@
                             <div class="col-12">
                                 <div class="pagination d-flex justify-content-center mt-5">
                                     <nav aria-label="Page navigation">
-                                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, categoriesId = ViewBag.CategoryId, SearchString = ViewBag.SearchString }),
+                                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, CategoryId = ViewBag.CategoryId, SearchString = ViewBag.SearchString }),
                                                  new PagedListRenderOptions
                                         {
                                             LiElementClasses = new string[] { "rounded" },

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
+using Sell__cleaning_services_e_commerce.Areas.MailService;
 using Microsoft.AspNetCore.Mvc;
 using Sell__cleaning_services_e_commerce.Areas.Other;
 using Sell__cleaning_services_e_commerce.Data;
@@ -31,10 +31,10 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
 
         public async Task<IActionResult> UserList()
         {
-            var adminUsers = await _userManager.GetUsersInRoleAsync("Admin");
-            var shipperUsers = await _userManager.GetUsersInRoleAsync("Shipper");
-
-            var filteredUsers = adminUsers.Union(shipperUsers)
+            var adminUsers = await _userManager.GetUsersInRoleAsync(RoleList.Admin);
+            var shipperUsers = await _userManager.GetUsersInRoleAsync(RoleList.Shipper);
+            var salesperson = await _userManager.GetUsersInRoleAsync(RoleList.Salesperson);
+            var filteredUsers = adminUsers.Union(shipperUsers).Union(salesperson)
                 .Where(u => u.Email != "vothanhly632002@gmail.com")
                 .ToList();
 
@@ -113,6 +113,10 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
                 else if (model.RoleName == "Admin")
                 {
                     await _userManager.AddToRoleAsync(user, RoleList.Admin);
+                }
+                else if (model.RoleName == "Salesperson")
+                {
+                    await _userManager.AddToRoleAsync(user, RoleList.Salesperson);
                 }
                 // Mặc định gán vai trò Customer
                 await _userManager.AddToRoleAsync(user, RoleList.Customer);

@@ -22,46 +22,41 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
         }
 
         // GET: Shop
-        public async Task<IActionResult> Index(int? page, string sortOrder, int? categoriesId, string SearchString)
+        public async Task<IActionResult> Index(int? page, string sortOrder, int? CategoryId, string SearchString)
         {
-            ViewBag.SearchString = SearchString;
-
-            // Phân trang
+            // Khởi tạo các biến và tham số đầu vào
             int pageSize = 15;
             int pageNumber = page ?? 1;
-            var products = await _context.Products
-                             .Include(p => p.ProductImages)
-                             .ToListAsync();
+            ViewBag.SearchString = SearchString;
 
-            // Lấy danh sách các categoriesName
-            ViewBag.CategoryId = categoriesId;
+            // Lấy danh sách các categories để hiển thị trong view
+            ViewBag.CategoryId = CategoryId;
             ViewBag.Category = _context.Categories.Select(ca => new Temp
             {
                 CategoryId = ca.CategoryId,
                 CategoryName = ca.CategoryName
             }).ToList();
 
-            var categoriesNames = _context.Categories.Select(c => c.CategoryName);
+            // Truy vấn sản phẩm từ cơ sở dữ liệu
+            var products = await _context.Products.Include(p => p.ProductImages).ToListAsync();
 
-            // Lọc theo Categories
-            if (categoriesId != null)
+            // Lọc sản phẩm theo Category nếu có
+            if (CategoryId != null)
             {
                 products = await _context.Products
-                             .Include(p => p.ProductImages).Where(p => p.CategoryId == categoriesId)
-                             .ToListAsync();
+                    .Include(p => p.ProductImages)
+                    .Where(p => p.CategoryId == CategoryId)
+                    .ToListAsync();
             }
 
-            // Sản phẩm hiển thị và sắp xếp sản phẩm
+            // Thiết lập sắp xếp theo thứ tự
             sortOrder = string.IsNullOrEmpty(sortOrder) ? "MoiNhat" : sortOrder;
             ViewBag.CurrentSort = sortOrder;
 
-            // Khai báo biến newProducts bên ngoài khối if-else
+            // Chuyển đổi danh sách sản phẩm thành ProductTemp
             IEnumerable<ProductTemp> newProducts;
-
-            // Lấy danh sách sản phẩm
             if (!String.IsNullOrEmpty(SearchString))
             {
-
                 newProducts = products.Select(p => new ProductTemp
                 {
                     ProductName = p.ProductName.Length > 15 ? p.ProductName.Substring(0, 15) + "..." : p.ProductName,
@@ -87,7 +82,7 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
                 });
             }
 
-            // Sắp xếp theo sortOrder
+            // Sắp xếp sản phẩm theo thứ tự đã chọn
             switch (sortOrder)
             {
                 case "MoiNhat":
@@ -104,11 +99,13 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
                     break;
             }
 
-            // Phân trang
+            // Phân trang danh sách sản phẩm
             var pagedProducts = newProducts.ToPagedList(pageNumber, pageSize);
 
+            // Trả về view với danh sách sản phẩm đã phân trang
             return View(pagedProducts);
         }
+
 
 
         public async Task<IActionResult> ProductDetail(int? id)

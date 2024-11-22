@@ -7,9 +7,10 @@ namespace Sell_​_cleaning_services_e_commerce.Areas.MailService
     {
         public Task SendEmailAsync(string email, string subject, string message)
         {
-            var mailServer = "vothanhly632002@gmail.com";
+            //var mailServer = "mail@gmail.com";
 
-            var pw = "dvuy bkkm oxbl tnkg";
+            //var pw = "pw pw pw pw";
+      
 
             var client = new SmtpClient("smtp.gmail.com", 587)
             {
@@ -19,11 +20,15 @@ namespace Sell_​_cleaning_services_e_commerce.Areas.MailService
             };
 
             return client.SendMailAsync(
-                new MailMessage(from: mailServer,
-                                to: email,
-                                subject,
-                                message
-                                ));
+                new MailMessage
+                {
+                    From = new MailAddress(mailServer),
+                    To = { email },
+                    Subject = subject,
+                    Body = message,  // Nội dung email có thể là mã HTML
+                    IsBodyHtml = true // Kích hoạt chế độ HTML
+                });
+
         }
     }
 }

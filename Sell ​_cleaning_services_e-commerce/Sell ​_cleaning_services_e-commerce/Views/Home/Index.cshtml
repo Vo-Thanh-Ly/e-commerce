@@ -3,6 +3,34 @@
     Layout = "~/Views/Shared/customer/_Layout.cshtml";
 }
 
+<!-- Carousel -->
+<div id="demo" class="carousel slide pt-5" data-bs-ride="carousel" style="height: 50vh;">
+  <!-- Indicators/dots -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+  </div>
+  <!-- The slideshow/carousel -->
+  <div class="carousel-inner h-100">
+    <div class="carousel-item active h-100">
+      <img src="https://noithatmanhhe.vn/media/29621/5-thiet-ke-toilet-chung.jpg" alt="Los Angeles" class="d-block w-100 h-100" style="object-fit: cover;">
+    </div>
+    <div class="carousel-item h-100">
+      <img src="https://xayladep.com/wp-content/uploads/2015/12/phong-ve-sinh-dep-768x580.jpg" alt="Chicago" class="d-block w-100 h-100" style="object-fit: cover;">
+    </div>
+    <div class="carousel-item h-100">
+      <img src="https://photo.znews.vn/w960/Uploaded/mdf_eioxrd/2021_07_06/4.jpg" alt="New York" class="d-block w-100 h-100" style="object-fit: cover;">
+    </div>
+  </div>
+  <!-- Left and right controls/icons -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
 
 <!-- Featurs Section Start -->
 <div class="container-fluid featurs py-5 mt-5 pt-5">
@@ -10,8 +38,8 @@
         <div class="row g-4">
             <div class="col-md-6 col-lg-3">
                 <div class="featurs-item text-center rounded bg-light p-4">
-                    <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-                        <i class="fas fa-car-side fa-3x" style="color:#fc5a31"></i>
+                    <div class="featurs-icon btn-square rounded-circle bg-primary mb-5 mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-truck text-white"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
                     </div>
                     <div class="featurs-content text-center">
                         <h5>Miễn phí vận chuyển</h5>
@@ -21,8 +49,8 @@
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="featurs-item text-center rounded bg-light p-4">
-                    <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-                        <i class="fas fa-user-shield fa-3x" style="color:#fc5a31"></i>
+                    <div class="featurs-icon btn-square rounded-circle bg-primary mb-5 mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield text-white"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                     </div>
                     <div class="featurs-content text-center">
                         <h5>Bảo mật thanh toán</h5>
@@ -32,8 +60,8 @@
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="featurs-item text-center rounded bg-light p-4">
-                    <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-                        <i class="fas fa-exchange-alt fa-3x" style="color:#fc5a31"></i>
+                    <div class="featurs-icon btn-square rounded-circle bg-primary mb-5 mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw text-white"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l.69 7.48A9 9 0 0 0 9.58 23"></path></svg>
                     </div>
                     <div class="featurs-content text-center">
                         <h5>Hoàn trả trong 30 ngày</h5>
@@ -43,8 +71,8 @@
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="featurs-item text-center rounded bg-light p-4">
-                    <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-                        <i class="fa fa-phone-alt fa-3x " style="color:#fc5a31"></i>
+                    <div class="featurs-icon btn-square rounded-circle bg-primary mb-5 mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone text-white"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                     </div>
                     <div class="featurs-content text-center">
                         <h5>Hỗ trợ 24/7</h5>
@@ -103,23 +131,17 @@
                                                 </a>
                                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom" data-product-id="@product.ProductId">
                                                     <h5 data-bs-toggle="tooltip" data-bs-placement="bottom" title="@product.fullname">@product.ProductName</h5>
-                                                    <p style="color: black">@product.Description</p>
+                                                    <p>@product.Description</p>
                                                     <div class="d-flex justify-content-between flex-lg-wrap">
-<<<<<<< HEAD
-                                                        <p class="text-dark fs-6 fw-bold mb-0 ">@product.Price</p>
+                                                        <p class="text-dark fs-6 fw-bold mb-0 ">@product.Price.ToString("#,0") VNĐ</p>
                                                     @{
                                                         /*add to cart*/
                                                     }
                                                         <input type="hidden" class="quantity" value="1" />
-                                                        <button class="add-to-cart btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i>Add to cart</button>
-=======
-                                                        <p style="width: 100%;" class="text-dark fs-5 fw-bold mb-0 d-inline-block " >@product.Price</p>
-                                                        <a class="btn border border-secondary rounded-pill px-3" style="color: white; background-color: #fc5a31">
-                                                            <i class="fa fa-shopping-bag me-2 " style="color: white"></i>
-                                                            Thêm vào giỏ hàng   
-                                                        </a>
->>>>>>> 86f029d5278df5aebd5fca5b1e1998f64fa7e71b
-                                                    </div>
+                                                    <button class="add-to-cart btn btn-outline-warning rounded-pill px-3">
+                                                        <i class="fa fa-shopping-bag me-2"></i> Add to cart
+                                                    </button>
+                                                </div>
                                                 </div>
 
                                             </div>
@@ -155,7 +177,7 @@
                                                                 <h5 data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item01.fullname">@item01.ProductName</h5>
                                                                 <p>@item01.Description</p>
                                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                                    <p class="text-dark fs-6 fw-bold mb-0 ">@item01.Price</p>
+                                                                    <p class="text-dark fs-6 fw-bold mb-0 ">@item01.Price.ToString("#,0") VNĐ</p>
                                                             @{
                                                                 /*add to cart*/
                                                             }

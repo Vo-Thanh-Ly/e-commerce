@@ -40,7 +40,7 @@ namespace Sell_​_cleaning_services_e_commerce.Models
         [Required]
         [Display(Name = "Số điện thoại")]
         [DataType(DataType.PhoneNumber)]
-        public int PhoneNumber { get; internal set; }
+        public String PhoneNumber { get; internal set; }
     }
 
 }

@@ -181,7 +181,11 @@
     </div>
 </div>
 
-
+<script>
+    tinymce.init({
+        selector: '#Description'
+    });
+</script>
 <script>
     document.getElementById('imageForm').addEventListener('submit', function (event) {
         event.preventDefault(); // Ngăn chặn gửi form

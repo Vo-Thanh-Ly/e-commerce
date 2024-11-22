@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Sell__cleaning_services_e_commerce.Areas.MailService;
 using Sell__cleaning_services_e_commerce.Areas.Other;
 using Sell__cleaning_services_e_commerce.Data;
 using Sell__cleaning_services_e_commerce.Models;
 using Sell__cleaning_services_e_commerce.Models.ViewModel;
 using Sell__cleaning_services_e_commerce.Models.VnPayViewModel;
 using Sell__cleaning_services_e_commerce.Services;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Sell_​_cleaning_services_e_commerce.Controllers
@@ -20,24 +22,24 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly IVnPayService _vnPayservice;
         private readonly ILogger<ShoppingCartController> _logger;
+        private readonly IEmailSender _sender;
 
         public ShoppingCartController(
             ApplicationDbContext context,
             SignInManager<User> signInManager,
             UserManager<User> userManager,
             IVnPayService vnPayService,
-            ILogger<ShoppingCartController> logger)
+            ILogger<ShoppingCartController> logger,
+            IEmailSender emailSender)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _vnPayservice = vnPayService;
             _logger = logger;
+            _sender = emailSender;
         }
-
-
-
-
+       public int countShopping = 0;
         // Hiển thị giỏ hàng
         public async Task<IActionResult> Index()
         {
@@ -53,10 +55,10 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
                     ProductId = sc.ProductId,
                     ProductName = sc.Product.ProductName,
                     Quantity = sc.Quantity,
-                    Price = sc.Product.Price,
-                    //      MaxQuantity = sc.Product.QuantityInStock
+                    Price = sc.Product.Price
                 })
                 .ToListAsync();
+
             }
             else
             { // Lấy giỏ hàng từ session
@@ -88,8 +90,25 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
             return View(cartViewModel);
         }
 
+        public async Task<IActionResult> GetCartItemCount()
+        {
+            int itemCount = 0;
 
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                itemCount = await _context.ShoppingCarts
+                    .Where(sc => sc.UserId == user.Id)
+                    .SumAsync(sc => sc.Quantity);
+            }
+            else
+            {
+                var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart");
+                itemCount = cart?.Sum(item => item.Quantity) ?? 0;
+            }
 
+            return Json(new { count = itemCount });
+        }
 
 
 
@@ -232,7 +251,32 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
             ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethods, "PaymentMethodId", "MethodName");
 
             var user = await _userManager.GetUserAsync(User);
+            Boolean usePersonalInfor=false;
+            if (user.Nomalname == null || user.Address == null || user.PhoneNumber == null)
+            {
+                // Tạo một chuỗi HTML và gán nó vào ViewBag
+                string htmlContent = @"
+                    <div class='form-group mb-3'>
+                        <div class='border-1 border-info'>
+                            <p>
+                                Nếu bạn muốn sử dụng thông tin mặc định của tài khoản, 
+                                bạn vui lòng cập nhật thông tin 
+                                <a class='text-lg' href='/Identity/Account/Manage'>tại đây</a>
+                            </p>
+                        </div>
+                    </div>";
+                // Gửi mã HTML đến View thông qua ViewBag
+                ViewBag.HtmlContent = htmlContent;
+            }
+           
+            else if (user.Nomalname != null && user.Address != null && user.PhoneNumber != null)
+            {
+                usePersonalInfor = true;
+            }
+            ViewBag.usePersonalInfor = usePersonalInfor;
 
+            // Add a checkbox to the view model
+            ViewData["UseDefaultUserInfo"] = new SelectList(new[] { new { Value = true, Text = "Sử dụng thông tin tài khoản" } }, "Value", "Text");
             List<CartItemViewModel> cartViewModel = await _context.ShoppingCarts
               .Where(sc => sc.UserId == user.Id)
               .Select(sc => new CartItemViewModel
@@ -251,10 +295,7 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
             return View(cartViewModel);
         }
 
-
-
-
-        [Authorize(Roles = RoleList.Customer)]
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Checkout(string HoTen, string DienThoai, string DiaChi, string GhiChu, int PaymentMethodId = 2)
         {
@@ -262,26 +303,27 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
             CheckoutVM model = new CheckoutVM();
             model.DiaChi = DiaChi;
             model.HoTen = HoTen;
-            model.DienThoai = int.Parse(DienThoai);
+            model.DienThoai = DienThoai;
             model.GhiChu = GhiChu;
 
-
-
-            foreach (var modelState in ModelState.Values)
+            if (bool.TryParse(Request.Form["UseDefaultUserInfo"], out bool useDefaultUserInfo) && useDefaultUserInfo)
             {
-                foreach (var error in modelState.Errors)
+                var user = await _userManager.GetUserAsync(User);
+                model.HoTen = user.UserName;
+                model.DiaChi = user.Address;
+                model.DienThoai = user.PhoneNumber;
+                if (model.HoTen == null || model.DiaChi == null || model.DienThoai == null)
                 {
-                    System.Diagnostics.Debug.WriteLine($"ModelState Error: {error.ErrorMessage}");
+                    return Redirect("~Areas/Account/Manage/Index.cshtml");
                 }
             }
+
 
             if (ModelState.IsValid)
             {
                 try
                 {
                     var user = await _userManager.GetUserAsync(User);
-                    System.Diagnostics.Debug.WriteLine($"User ID: {user?.Id}");
-
                     var cartItems = await _context.ShoppingCarts
                         .Include(sc => sc.Product)
                         .Where(sc => sc.UserId == user.Id)
@@ -339,7 +381,7 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
                                 Address = model.DiaChi ?? khachHang.Address,
                                 PhoneNumber = model.DienThoai,
                                 InvoiceDate = DateTime.Now,
-                                StatusId = 1,
+                                StatusId = 2,
                                 Notes = model.GhiChu,
                                 TotalAmount = sum
                             };
@@ -381,7 +423,7 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
                                     ProductId = item.ProductId,
                                     Quantity = item.Quantity,
                                     UnitPrice = item.Product.Price,
-                                    Total = (decimal)(item.Quantity * item.Product.Price)
+                                    Total = (item.Quantity * item.Product.Price)
                                 };
                                 invoiceDetails.Add(detail);
                                 System.Diagnostics.Debug.WriteLine($"Adding invoice detail for product: {item.ProductId}");
@@ -390,7 +432,7 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
                             _context.InvoiceDetails.AddRange(invoiceDetails);
                             await _context.SaveChangesAsync();
                             System.Diagnostics.Debug.WriteLine("Invoice details created successfully");
-
+                            await SendOrderConfirmationEmailAsync(user, hoadon, invoiceDetails, "Thanh toán khi nhận hàng", hoadon.Notes);
                             // Xóa giỏ hàng
                             System.Diagnostics.Debug.WriteLine($"Removing {cartItems.Count} items from shopping cart");
                             _context.ShoppingCarts.RemoveRange(cartItems);
@@ -436,29 +478,10 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
                 }
             }
 
-            System.Diagnostics.Debug.WriteLine("ModelState is invalid");
             // If we got this far, something failed, redisplay form
             ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethods, "PaymentMethodId", "MethodName");
             return View(model);
         }
-
-        //[Authorize(Roles = RoleList.Customer)]
-        //public IActionResult PaymentCallBack()
-        //{
-        //    var response = _vnPayservice.PaymentExecute(Request.Query);
-
-        //    // Kiểm tra nếu response null hoặc mã phản hồi khác "00" (tức là không thành công)
-        //    if (response == null || response.VnPayResponseCode != "00")
-        //    {
-        //        TempData["Message"] = $"Lỗi thanh toán VN Pay: {response?.VnPayResponseCode}";
-        //        return RedirectToAction("PaymentFail");
-        //    }
-
-
-        //    // Truyền phản hồi dưới dạng dynamic vào View
-        //    return View((object)response);
-        //}
-
 
         public async Task<IActionResult> PaymentCallBack()
         {
@@ -534,13 +557,16 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
                         ProductId = item.ProductId,
                         Quantity = item.Quantity,
                         UnitPrice = item.Product.Price,
-                        Total = (decimal)(item.Quantity * item.Product.Price)
+                        Total = (item.Quantity * item.Product.Price)
                     };
                     invoiceDetails.Add(detail);
                 }
 
                 _context.InvoiceDetails.AddRange(invoiceDetails);
                 await _context.SaveChangesAsync();
+
+                await SendOrderConfirmationEmailAsync(user, hoadon, invoiceDetails, "Đã thanh toán", hoadon.Notes);
+
 
                 // Xóa giỏ hàng
                 _context.ShoppingCarts.RemoveRange(cartItems);
@@ -563,6 +589,63 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
             }
         }
 
+        public async Task SendOrderConfirmationEmailAsync(User user, Invoice hoadon, List<InvoiceDetail> invoiceDetails, string status, string note)
+        {
+            var emailContent = new StringBuilder();
+
+            // Nội dung email HTML
+            emailContent.AppendLine("<html>");
+            emailContent.AppendLine("<body>");
+            emailContent.AppendLine($"<h2>Kính chào {hoadon.FullName},</h2>");
+            emailContent.AppendLine("<p>Cảm ơn bạn đã đặt hàng! Dưới đây là thông tin chi tiết về đơn hàng của bạn:</p>");
+            emailContent.AppendLine("<h3>Thông tin đơn hàng:</h3>");
+            emailContent.AppendLine("<table style='width:100%; border-collapse: collapse;'>");
+            emailContent.AppendLine("<tr><td><strong>Mã đơn hàng:</strong></td><td>" + hoadon.InvoiceId + "</td></tr>");
+            emailContent.AppendLine("<tr><td><strong>Ngày đặt hàng:</strong></td><td>" + hoadon.InvoiceDate.ToString() + "</td></tr>");
+            emailContent.AppendLine("<tr><td><strong>Địa chỉ giao hàng:</strong></td><td>" + hoadon.Address + "</td></tr>");
+            emailContent.AppendLine("<tr><td><strong>Số điện thoại:</strong></td><td>" + hoadon.PhoneNumber + "</td></tr>");
+            emailContent.AppendLine("<tr><td><strong>Ghi chú:</strong></td><td>" + note + "</td></tr>");
+            emailContent.AppendLine("</table>");
+
+            // Danh sách sản phẩm
+            emailContent.AppendLine("<h3>Sản phẩm:</h3>");
+            emailContent.AppendLine("<table style='width:100%; border-collapse: collapse; border: 1px solid #ddd;'>");
+            emailContent.AppendLine("<tr style='background-color: #f2f2f2;'>");
+            emailContent.AppendLine("<th style='padding: 8px; text-align: left;'>Tên sản phẩm</th>");
+            emailContent.AppendLine("<th style='padding: 8px; text-align: left;'>Số lượng</th>");
+            emailContent.AppendLine("<th style='padding: 8px; text-align: right;'>Giá mỗi sản phẩm</th>");
+            emailContent.AppendLine("</tr>");
+
+            foreach (var item in invoiceDetails)
+            {
+                emailContent.AppendLine("<tr>");
+                emailContent.AppendLine($"<td style='padding: 8px; border: 1px solid #ddd;'>{item.Product.ProductName}</td>");
+                emailContent.AppendLine($"<td style='padding: 8px; border: 1px solid #ddd;'>{item.Quantity}</td>");
+                emailContent.AppendLine($"<td style='padding: 8px; text-align: right; border: 1px solid #ddd;'>{item.UnitPrice.ToString("N0")} VNĐ</td>");
+                emailContent.AppendLine("</tr>");
+            }
+            emailContent.AppendLine("</table>");
+
+            // Tổng tiền và trạng thái thanh toán
+            emailContent.AppendLine("<h3>Tổng tiền:</h3>");
+            emailContent.AppendLine("<p><strong>" + hoadon.TotalAmount.ToString("N0") + " VNĐ</strong></p>");
+            emailContent.AppendLine("<h3>Trạng thái thanh toán:</h3>");
+            emailContent.AppendLine("<p><strong>" + status + "</strong></p>");
+
+            emailContent.AppendLine("<p>Xin cảm ơn bạn đã mua hàng tại cửa hàng của chúng tôi!</p>");
+            emailContent.AppendLine("<p>Nếu có bất kỳ thắc mắc nào về đơn hàng của bạn, vui lòng liên hệ với chúng tôi qua email hoặc số điện thoại 123456789.</p>");
+
+            emailContent.AppendLine("</body>");
+            emailContent.AppendLine("</html>");
+
+            // Gửi email
+            await _sender.SendEmailAsync(
+                user.Email,
+                "Xác nhận đơn hàng của bạn",
+                emailContent.ToString()
+            );
+        }
+
         private VnPaymentRequestModel ParseOrderDescriptionToVnPayResponse(string description)
         {
             var model = new VnPaymentRequestModel();
@@ -577,8 +660,10 @@ namespace Sell_​_cleaning_services_e_commerce.Controllers
                 model.Notes = match.Groups["Notes"].Value;
                 model.FullNameInInvoice = match.Groups["FullNameInInvoice"].Value;
                 model.AddressInInvoice = match.Groups["AddressInInvoice"].Value;
-                model.PhoneNumberInInvoice = int.Parse(match.Groups["PhoneNumberInInvoice"].Value);
+                model.PhoneNumberInInvoice = match.Groups["PhoneNumberInInvoice"].Value;
             }
+
+
             else
             {
                 throw new InvalidOperationException("Không thể phân giải chuỗi OrderDescription.");

@@ -10,7 +10,7 @@
         <h2 class="h3 mb-0">Đơn Hàng Đang Giao</h2>
         <nav class="nav nav-pills">
             <a class="nav-link active me-2" asp-action="Shipper_Index">Đơn đang giao</a>
-            <a class="nav-link" asp-action="GetUndeliveredOrders">Đơn giao thất bại</a>
+          
         </nav>
     </div>
 
@@ -25,7 +25,7 @@
                     <th>Mã GD</th>
                     <th>Ghi chú</th>
                     <th>Địa chỉ</th>
-                    <th>Số tiền</th>
+                    
                     <th>Phương thức</th>
                     @if (!User.IsInRole("Admin"))
                     {
@@ -38,7 +38,9 @@
                 {
                     <tr>
                         <td>
-                            <div class="fw-medium">@item.Invoice.FullName</div>
+                            <a asp-controller="Shipper" asp-action="OrderDetails" asp-route-id="@item.PaymentId">
+                                <div class="fw-medium">@item.Invoice.FullName</div>
+                            </a>
                         </td>
                         <td>
                             <div class="text-nowrap">@item.Invoice.PhoneNumber</div>
@@ -55,36 +57,13 @@
                         <td>
                             <div class="text-truncate" style="max-width: 200px;">@item.Address</div>
                         </td>
-                        <td>
-                            <div class="fw-bold text-primary">@item.Invoice.TotalAmount.ToString("N0") đ</div>
-                        </td>
+                       
                         <td>
                             <span class="badge bg-info">@item.PaymentMethod.MethodName</span>
                         </td>
-                        @if (!User.IsInRole("Admin"))
-                        {
-                            <td>
-                                <div class="btn-group">
-                                    @if (item.PaymentDate == null)
-                                    {
-                                        <a class="btn btn-success btn-sm" asp-action="CompleteDelivery" asp-route-id="@item.PaymentId">
-                                            <i class="bi bi-cash-coin me-1"></i>Giao & Thu tiền
-                                        </a>
-                                    }
-                                    else
-                                    {
-                                        <a class="btn btn-primary btn-sm" asp-action="SuccessfulDelivery" asp-route-id="@item.PaymentId">
-                                            <i class="bi bi-check-circle me-1"></i>Giao thành công
-                                        </a>
-                                    }
-                                    <a class="btn btn-danger btn-sm" asp-action="FailedDelivery" asp-route-id="@item.PaymentId">
-                                        <i class="bi bi-x-circle me-1"></i>Giao thất bại
-                                    </a>
-                                </div>
-                            </td>
-                        }
                     </tr>
                 }
+
             </tbody>
         </table>
     </div>
@@ -124,26 +103,7 @@
                             </div>
                         }
                     </div>
-                    @if (!User.IsInRole("Admin"))
-                    {
-                        <div class="d-grid gap-2">
-                            @if (item.PaymentDate == null)
-                            {
-                                <a class="btn btn-success action-btn" asp-action="CompleteDelivery" asp-route-id="@item.PaymentId">
-                                    <i class="bi bi-cash-coin me-2"></i>Giao hàng & Thu tiền
-                                </a>
-                            }
-                            else
-                            {
-                                <a class="btn btn-primary action-btn" asp-action="SuccessfulDelivery" asp-route-id="@item.PaymentId">
-                                    <i class="bi bi-check-circle me-2"></i>Giao hàng thành công
-                                </a>
-                            }
-                            <a class="btn btn-outline-danger action-btn" asp-action="FailedDelivery" asp-route-id="@item.PaymentId">
-                                <i class="bi bi-x-circle me-2"></i>Giao hàng thất bại
-                            </a>
-                        </div>
-                    }
+                 
                 </div>
             </div>
         }

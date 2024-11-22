@@ -3,7 +3,7 @@
     ViewData["Title"] = "Giỏ Hàng";
     Layout = "~/Views/Shared/customer/_Layout.cshtml";
 }
-<div class="container mt-5">
+<div class="container mt-5 pt-5">
     <h2 class="mb-4">Giỏ Hàng Của Bạn</h2>
     @if (!Model.Any())
     {
@@ -38,7 +38,7 @@
                                         onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                 </button>
                             </td>
-                            <td class="item-price">@item.Price VNĐ</td>
+                            <td class="item-price">@item.Price.ToString("#,0") VNĐ</td>
                             <td class="item-total">@item.TotalPrice VNĐ</td>
                             <td><button class="btn btn-danger btn-sm remove-item">Xóa</button></td>
                         </tr>

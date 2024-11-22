@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>VietClean</title>
+    <title>Siêu sạch</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -39,85 +39,52 @@
             text-overflow: ellipsis;
         }
     </style>
-
-
-
 </head>
 
 <body>
 
-    <!-- Spinner với backdrop blur -->
-    <div id="spinner" class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-white bg-opacity-75" style="backdrop-filter: blur(8px); z-index: 9999;">
-        <div class="spinner-grow text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
+    <!-- Spinner Start -->
+    <div id="spinner"
+         class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" role="status"></div>
     </div>
-
-    <!-- Header -->
-    <header class="header-section">
-        <!-- Top Bar -->
-        <div class="bg-primary py-2 d-none d-lg-block">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <div class="d-flex text-white small">
-                            <div class="me-4">
-                                <i class="fas fa-map-marker-alt me-2 opacity-75"></i>
-                                <a href="#" class="text-white text-decoration-none">Ninh Kiều, Cần Thơ</a>
-                            </div>
-                            <div>
-                                <i class="fas fa-envelope me-2 opacity-75"></i>
-                                <a href="mailto:vothanhly632002@gmail.com" class="text-white text-decoration-none">vothanhly632002@gmail.com</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 text-end">
-                        <div class="text-white small">
-                            <a href="#" class="text-white text-decoration-none">Điều khoản sử dụng</a>
-                            <span class="mx-2">/</span>
-                            <a href="#" class="text-white text-decoration-none">Bán hàng và hoàn tiền</a>
-                        </div>
-                    </div>
+    <!-- Spinner End -->
+    <!-- Navbar start -->
+    <div class="container-fluid fixed-top">
+        <div class="container topbar bg-primary d-none d-lg-block">
+            <div class="d-flex justify-content-between">
+                
+                <div class="top-link pe-2">
+                    <a href="#" class="text-white"><small class="text-white mx-2">Điều khoản sử dụng</small>/</a>
+                    <a href="#" class="text-white"><small class="text-white ms-2">Bán hàng và hoàn tiền</small></a>
                 </div>
             </div>
         </div>
-
-        <!-- Main Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top py-3">
-            <div class="container">
-                <!-- Logo -->
-                <a class="navbar-brand" asp-controller="Home" asp-action="index">
-                    <h1 class="text-primary m-0 fw-bold"><i class="fa fa-broom"></i>VNClean</h1>
+        <div class="container px-0">
+            <nav class="navbar navbar-light bg-white navbar-expand-xl">
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand">
+                    <h1 class="text-primary display-6">SieuSach</h1>
                 </a>
-
-                <!-- Mobile Toggle -->
-                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars text-primary"></span>
                 </button>
+                <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto">
+                        <a asp-controller="Home" asp-action="index" class="nav-item nav-link active">Trang chủ</a>
+                        <a id="CuaHang" class="nav-link" asp-controller="Shop" asp-action="index">Cửa hàng</a>
 
-                <!-- Navigation Items -->
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item">
-                            <a id="TrangChu" class="nav-link" asp-controller="Home" asp-action="index">Trang chủ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a id="CuaHang" class="nav-link" asp-controller="Shop" asp-action="index">Cửa hàng</a>
-                        </li>
-                    </ul>
-
-                    <!-- Right Navigation Items -->
-                    <div class="d-flex align-items-center gap-3">
-                        <!-- Search Button -->
-                        <button class="btn btn-outline-primary rounded-circle p-2" data-bs-toggle="modal" data-bs-target="#searchModal">
-                            <i class="fas fa-search"></i>
+                    </div>
+                    <div class="d-flex m-3 me-0">
+                        <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
+                                data-bs-toggle="modal" data-bs-target="#searchModal">
+                            <i class="fas fa-search text-primary"></i>
                         </button>
-<<<<<<< HEAD
-=======
-                        <a href="#" class="position-relative me-4 my-auto">
-                            <i class="fa fa-shopping-bag fa-2x"></i>
+                        <a asp-controller="ShoppingCart" asp-action="Index" class="position-relative me-4 my-auto">
+                            <i class="fa fa-shopping-bag fa-2x" style="color:#001F3F"></i>
                             <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
-                                  style="top: -5px; left: 15px; height: 20px; min-width: 20px;"></span>
+                                  id="countShopping" style="top: -5px; left: 15px; height: 20px; min-width: 20px;"></span>
+
                         </a>
                         @if (SignInManager.IsSignedIn(User))
                         {
@@ -126,49 +93,28 @@
                                     <i class="fas fa-user fa-lg" style="color: white;"></i>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
->>>>>>> 86f029d5278df5aebd5fca5b1e1998f64fa7e71b
 
-                        <!-- Cart -->
-                        <a asp-controller="ShoppingCart" asp-action="Index" class="btn btn-outline-primary position-relative rounded-circle p-2">
-                            <i class="fa fa-shopping-bag"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                @* số lượng sản phẩm ----------------------------------------------------------------------------------------------------------------------------------------------------- *@
-                                <span class="visually-hidden">items in cart</span>
-                            </span>
-                        </a>
-
-                        <!-- User Menu -->
-                        <div class="dropdown">
-                            <button class="btn btn-outline-primary rounded-circle p-2" type="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-user"></i>
-                            </button>
-                            @if (SignInManager.IsSignedIn(User))
-                            {
-                                <ul class="dropdown-menu dropdown-menu-end shadow border-0">
-                                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Cài đặt tài khoản</a></li>
-                                    @if (User.IsInRole("Admin"))
+                                    <li><a class="dropdown-item active" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Settings</a></li>
+                                    @if (User.IsInRole(Sell__cleaning_services_e_commerce.Areas.Other.RoleList.Admin))
                                     {
-                                        <li><a class="dropdown-item" asp-controller="Products" asp-action="Index">Quản trị viên</a></li>
+                                        <li><a class="dropdown-item active" asp-controller="AdminHome" asp-action="UserList">Trang quản trị</a></li>
                                     }
                                     @if (User.IsInRole(Sell__cleaning_services_e_commerce.Areas.Other.RoleList.Shipper))
                                     {
-                                        <li><a class="dropdown-item" asp-controller="Shipper" asp-action="Shipper_Index">Nhân viên giao hàng</a></li>
+                                        <li><a class="dropdown-item active" asp-controller="Shipper" asp-action="Shipper_Index">Giao hàng</a></li>
+                                          
                                     }
-                                    <li><hr class="dropdown-divider"></li>
+                                    @if (User.IsInRole(Sell__cleaning_services_e_commerce.Areas.Other.RoleList.Salesperson))
+                                    {
+                                        <li><a class="dropdown-item active" asp-controller="Salesperson" asp-action="Index">Salesperson</a></li>
+
+                                    }
                                     <li>
-                                        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                            <button type="submit" class="dropdown-item text-danger">Đăng xuất</button>
+                                        <form class="form-inline dropdown-item" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                            <button type="submit" class="nav-link btn ">Đăng xuất</button>
                                         </form>
                                     </li>
                                 </ul>
-<<<<<<< HEAD
-                            }
-                            else
-                            {
-                                <ul class="dropdown-menu dropdown-menu-end shadow border-0">
-                                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Đăng ký</a></li>
-                                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a></li>
-=======
                             </div>
                         }
                         else
@@ -181,138 +127,111 @@
                                 <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
                                     <li><a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Đăng ký</a></li>
                                     <li><a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a></li>
->>>>>>> 86f029d5278df5aebd5fca5b1e1998f64fa7e71b
                                 </ul>
-                            }
-                        </div>
+                            </div>
+                        }
+
                     </div>
                 </div>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Search Modal -->
-    <div class="modal fade" id="searchModal" tabindex="-1">
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+    <!-- Modal Search Start -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title">Tìm kiếm sản phẩm</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <div class="modal-content rounded-0">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tìm tên sản phẩm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body d-flex align-items-center justify-content-center">
-                    <div class="input-group" style="max-width: 600px;">
-                        <input type="search" class="form-control form-control-lg" placeholder="Nhập từ khóa tìm kiếm..." name="SearchString">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-search"></i>
-                        </button>
+                <div class="modal-body d-flex align-items-center">
+                    <div class="input-group w-75 mx-auto d-flex">
+                        <input type="search" class="form-control p-3" placeholder="keywords"
+                               aria-describedby="search-icon-1">
+                        <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div style="height: 100px;"></div>
+
     @RenderBody()
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
-        <div class="container py-5">
-            <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5);">
-                <div class="row g-4">
-                    <div class="col-lg-3">
-                        <a href="#">
-                            <h1 class="text-primary mb-0">VNClean</h1>
-
+    <div class="container-fluid bg-primary text-light footer py-5">
+        <div class="container">
+            <!-- Top Section -->
+            <div class="row align-items-center pb-5 mb-4 border-bottom border-light">
+                <div class="col-md-4 mb-3 mb-md-0 text-center text-md-start">
+                    <a asp-controller="Home" asp-action="Index">
+                        <h2 class="text-warning">SieuSach</h2>
+                    </a>
+                    <p class="small">Mang đến giải pháp vệ sinh hoàn hảo cho mọi môi trường.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="d-flex justify-content-center">
+                        <a class="btn btn-outline-light me-2 btn-md-square rounded-circle" href="">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="btn btn-outline-light me-2 btn-md-square rounded-circle" href="">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="btn btn-outline-light me-2 btn-md-square rounded-circle" href="">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a class="btn btn-outline-light btn-md-square rounded-circle" href="">
+                            <i class="fab fa-linkedin-in"></i>
                         </a>
                     </div>
-<<<<<<< HEAD
-
-                    <div class="col-lg-3">
-                        <div class="d-flex justify-content-end pt-3">
-                            <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href="">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href="">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href="">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                            <a class="btn btn-outline-secondary btn-md-square rounded-circle" href="">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                        </div>
-                    </div>
-=======
                 </div>
                 <div class="col-md-4 text-center text-md-end">
-                    <a href="" class="btn btn-warning px-4 py-2 rounded-pill" >Mua Ngay</a>
->>>>>>> 86f029d5278df5aebd5fca5b1e1998f64fa7e71b
+                    <a href="" class="btn btn-warning px-4 py-2 rounded-pill">Mua Ngay</a>
                 </div>
             </div>
 
-            <div class="row g-5">
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-item">
-                        <h4 class="text-light mb-3">Tại sao khách hàng tin tưởng chúng tôi!</h4>
-                        <p class="mb-4">
-                            Chúng tôi cung cấp các dụng cụ vệ sinh chất lượng cao, đảm bảo vệ sinh an toàn
-                            và hiệu quả cho mọi môi trường. Với đội ngũ hỗ trợ nhiệt tình và sản phẩm uy tín, chúng tôi
-                            luôn mang đến sự hài lòng cho khách hàng.
-                        </p>
-                        <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Tìm Hiểu Thêm</a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="d-flex flex-column text-start footer-item">
-                        <h4 class="text-light mb-3">Thông Tin Cửa Hàng</h4>
-                        <a class="btn-link" href="">Về Chúng Tôi</a>
-                        <a class="btn-link" href="">Liên Hệ</a>
-                        <a class="btn-link" href="">Chính Sách Bảo Mật</a>
-                        <a class="btn-link" href="">Điều Khoản & Điều Kiện</a>
-                        <a class="btn-link" href="">Chính Sách Đổi Trả</a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="d-flex flex-column text-start footer-item">
-                        <h4 class="text-light mb-3">Tài Khoản</h4>
-                        <a class="btn-link" href="">Tài Khoản Của Tôi</a>
-                        <a class="btn-link" href="">Chi Tiết Cửa Hàng</a>
-                        <a class="btn-link" href="">Giỏ Hàng</a>
-                        <a class="btn-link" href="">Danh Sách Yêu Thích</a>
-                        <a class="btn-link" href="">Lịch Sử Đơn Hàng</a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-item">
-                        <h4 class="text-light mb-3">Liên Hệ</h4>
-                        <p>Địa chỉ: Ninh Kiều, Cần Thơ</p>
-                        <p>Email: vothanhly632002@gmail.com</p>
-                        <p>Điện thoại: +0123 4567 8910</p>
-                        <p>Chấp Nhận Thanh Toán</p>
-                        <img src="img/payment.png" class="img-fluid" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer End -->
-    <!-- Copyright Start -->
-    <div class="container-fluid copyright bg-dark py-4">
-        <div class="container">
+            <!-- Middle Section: Information Links -->
             <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    <span class="text-light">
-                        <a href="#"><i class="fas fa-copyright text-light me-2"></i>VNClean</a>,
-                        Sản phẩm báo cáo Niên luận cơ sở.
-                    </span>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-3">Khách Hàng Tin Tưởng</h4>
+                    <p>Chất lượng sản phẩm hàng đầu, đảm bảo an toàn và hiệu quả. Đội ngũ hỗ trợ tận tâm.</p>
+                    <a href="" class="btn btn-outline-light py-2 px-4 rounded-pill text-warning">Tìm Hiểu Thêm</a>
                 </div>
-
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-3">Thông Tin Cửa Hàng</h4>
+                    <ul class="list-unstyled text-light">
+                        <li><a class="text-light text-decoration-none" href="">Về Chúng Tôi</a></li>
+                        <li><a class="text-light text-decoration-none" href="">Liên Hệ</a></li>
+                        <li><a class="text-light text-decoration-none" href="">Chính Sách Bảo Mật</a></li>
+                        <li><a class="text-light text-decoration-none" href="">Điều Khoản & Điều Kiện</a></li>
+                        <li><a class="text-light text-decoration-none" href="">Chính Sách Đổi Trả</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-3">Tài Khoản</h4>
+                    <ul class="list-unstyled text-light">
+                        <li><a class="text-light text-decoration-none" href="">Tài Khoản Của Tôi</a></li>
+                        <li><a class="text-light text-decoration-none" href="">Chi Tiết Cửa Hàng</a></li>
+                        <li><a class="text-light text-decoration-none" href="">Giỏ Hàng</a></li>
+                        <li><a class="text-light text-decoration-none" href="">Danh Sách Yêu Thích</a></li>
+                        <li><a class="text-light text-decoration-none" href="">Lịch Sử Đơn Hàng</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-3">Liên Hệ</h4>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> Ninh Kiều, Cần Thơ</p>
+                    <p><i class="fas fa-envelope me-2"></i> vothanhly632002@gmail.com</p>
+                    <p><i class="fas fa-phone me-2"></i> +0123 4567 8910</p>
+                    <p>Chấp Nhận Thanh Toán</p>
+                    <img src="img/payment.png" class="img-fluid" alt="Phương thức thanh toán">
+                </div>
             </div>
+
+
         </div>
     </div>
+    <!-- Footer End -->
     <!-- Copyright End -->
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top">
@@ -332,6 +251,9 @@
     <script src="~/customer/js/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+
+
+
         $(document).ready(function () {
             $('.add-to-cart').on('click', function (e) {
                 e.preventDefault();
@@ -427,14 +349,6 @@
             });
 
 
-            // function updateTotalPrice() {
-            //     var total = 0;
-            //     $('.item-total').each(function () {
-            //         total += parseFloat($(this).text());
-            //     });
-            //     $('#cart-total').text(total.toFixed(2) + ' VNĐ');
-            // }
-
 
             function updateTotalPrice() {
                 var total = 0;
@@ -446,6 +360,27 @@
 
         });
 
+        $(document).ready(function () {
+            function updateCartItemCount() {
+                $.ajax({
+                    url: '/ShoppingCart/GetCartItemCount', // Thay '/Account' bằng route phù hợp nếu cần
+                    type: 'GET',
+                    success: function (response) {
+                        $('#countShopping').text(response.count);
+                    },
+                    error: function () {
+                        console.error('Failed to fetch cart item count');
+                    }
+                });
+            }
+
+            // Gọi hàm khi trang được tải
+            updateCartItemCount();
+
+            // Có thể gọi lại hàm này khi cần cập nhật số lượng
+        });
+
     </script>
 </body>
 </html>
+

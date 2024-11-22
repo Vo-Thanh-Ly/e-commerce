@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Sell__cleaning_services_e_commerce.Models.InvoiceDetail>
+
+@{
+    ViewData["Title"] = "OrderDetails";
+    Layout = "~/Views/Shared/admin/_Layout.cshtml";
+}
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Product.ProductName)
+                    </td>
+                    <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                    </td>
+                    <td class="text-right">
+                    @string.Format("{0:#,0} VNĐ", item.Total)
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Footer của bảng với tổng tiền -->
+<div class="d-flex justify-content-between">
+    <div><strong>Total:</strong></div>
+    <div><strong>@string.Format("{0:#,0} VNĐ", ViewBag.sum)</strong></div>
+</div>
+
+@if (User.IsInRole(Sell__cleaning_services_e_commerce.Areas.Other.RoleList.Shipper))
+{
+        <div class="d-grid gap-2">
+        @if (ViewBag.sc == 0)
+        {
+                    <a class="btn btn-success action-btn" asp-action="CompleteDelivery" asp-route-id="@ViewBag.id">
+                        <i class="bi bi-cash-coin me-2"></i>Giao hàng & Thu tiền
+                    </a>
+        }
+        @if (ViewBag.sc == 1)
+        {
+                    <a class="btn btn-primary action-btn" asp-action="SuccessfulDelivery" asp-route-id="@ViewBag.id">
+                        <i class="bi bi-check-circle me-2"></i>Giao hàng thành công
+                    </a>
+        }
+            <a href="#" class="btn btn-outline-danger action-btn" id="failedDeliveryBtn">
+                <i class="bi bi-x-circle me-2"></i>Giao hàng thất bại
+            </a>
+        </div>
+}
+
+<script>
+    document.getElementById("failedDeliveryBtn").addEventListener("click", function (event) {
+        event.preventDefault();
+
+        var orderId = '@ViewBag.id';
+        var liDo = prompt("Nhập lý do giao hàng thất bại:");
+
+        if (liDo) {
+            fetch(`/Shipper/FailedDelivery?id=${orderId}&liDo=${encodeURIComponent(liDo)}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    alert('Giao hàng thất bại đã được thông báo!');
+                    window.location.href = '/Shipper/Shipper_Index';
+                } else {
+                    alert('Có lỗi xảy ra khi xử lý yêu cầu.');
+                }
+            })
+            .catch(error => {
+                console.error('Có lỗi xảy ra:', error);
+                alert('Có lỗi xảy ra khi gửi yêu cầu.');
+            });
+        } else {
+            alert("Bạn phải nhập lý do.");
+        }
+    });
+</script>

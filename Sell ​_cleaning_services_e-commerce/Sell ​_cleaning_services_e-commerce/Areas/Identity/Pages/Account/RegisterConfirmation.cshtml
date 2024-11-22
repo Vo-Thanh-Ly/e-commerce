@@ -1,22 +1,26 @@
 ﻿@page
 @model RegisterConfirmationModel
 @{
-    ViewData["Title"] = "Register confirmation";
+    ViewData["Title"] = "Xác nhận đăng ký";
 }
 
-<h1>@ViewData["Title"]</h1>
-@{
-    if (@Model.DisplayConfirmAccountLink)
-    {
-        <p>
-            Một email xác thực đã được gửi đến bạn, nếu đã xác thực tài khoản <a id="confirm-link" href="/Identity/Account/Login">nhấn vào đây để đăng nhập</a>
-        </p>
-    }
-    else
-    {
-        <p>
-            Kiểm tra email của bạn để xác thực tài khoản
-        </p>
-    }
-}
+<div class="container mt-5">
+    <h1 class="text-primary text-center">@ViewData["Title"]</h1>
 
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            @if (@Model.DisplayConfirmAccountLink)
+            {
+                <p>
+                    Một email xác thực đã được gửi đến bạn. Nếu đã xác thực tài khoản, <a id="confirm-link" href="/Identity/Account/Login" class="btn btn-link">nhấn vào đây để đăng nhập</a>.
+                </p>
+            }
+            else
+            {
+                <p>
+                    Kiểm tra email của bạn để xác thực tài khoản.
+                </p>
+            }
+        </div>
+    </div>
+</div>

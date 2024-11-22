@@ -41,9 +41,10 @@
     <div class="form-group">
         <label asp-for="RoleName"></label>
         <select asp-for="RoleName" class="form-control">
-            <option value="Shipper">Shipper</option>
+          
             <option value="Admin">Admin</option>
-            <option value="Customer">Customer</option>
+            <option value="Salesperson">Salesperson</option>
+            <option value="Shipper">Shipper</option>
         </select>
         <span asp-validation-for="RoleName" class="text-danger"></span>
     </div>

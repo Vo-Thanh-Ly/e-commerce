@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Sell__cleaning_services_e_commerce.Areas.Other;
 using Sell__cleaning_services_e_commerce.Models;
 
 
@@ -13,7 +14,7 @@ namespace Sell_​_cleaning_services_e_commerce.Services
 
         public static async Task InitializeAsync(RoleManager<Role> roleManager)
         {
-            string[] roleNames = { "Admin", "Customer" };
+            string[] roleNames = { RoleList.Admin, RoleList.Salesperson, RoleList.Shipper, RoleList.Customer };
             foreach (var roleName in roleNames)
             {
                 var roleExist = await roleManager.RoleExistsAsync(roleName);

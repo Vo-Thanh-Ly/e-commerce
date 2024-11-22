@@ -1,5 +1,5 @@
 ﻿@{
-    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
     {
         Layout = parentLayout.ToString();
     }
@@ -8,12 +8,8 @@
         Layout = "/Areas/Identity/Pages/_Layout.cshtml";
     }
 }
-
-<h1>Manage your account</h1>
-
-<div>
-    <h2>Change your account settings</h2>
-    <hr />
+<div class="container my-5">
+    <h1>Quản lý tài khoản</h1>
     <div class="row">
         <div class="col-md-3">
             <partial name="_ManageNav" />
@@ -23,7 +19,6 @@
         </div>
     </div>
 </div>
-
 @section Scripts {
     @RenderSection("Scripts", required: false)
 }

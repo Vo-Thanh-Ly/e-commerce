@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj": {}
+    "C:\\Users\\votha\\source\\repos\\Vo-Thanh-Ly\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj": {}
   },
   "projects": {
-    "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj": {
+    "C:\\Users\\votha\\source\\repos\\Vo-Thanh-Ly\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj",
+        "projectUniqueName": "C:\\Users\\votha\\source\\repos\\Vo-Thanh-Ly\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj",
         "projectName": "Sell ​_cleaning_services_e-commerce",
-        "projectPath": "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj",
+        "projectPath": "C:\\Users\\votha\\source\\repos\\Vo-Thanh-Ly\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce.csproj",
         "packagesPath": "C:\\Users\\votha\\.nuget\\packages\\",
-        "outputPath": "D:\\HocTap\\ThuongMaiDienTu\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\obj\\",
+        "outputPath": "C:\\Users\\votha\\source\\repos\\Vo-Thanh-Ly\\e-commerce\\Sell ​_cleaning_services_e-commerce\\Sell ​_cleaning_services_e-commerce\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -43,8 +43,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -67,8 +68,10 @@
               "version": "[8.0.8, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.8, )"
+              "version": "[8.0.10, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
@@ -102,7 +105,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
